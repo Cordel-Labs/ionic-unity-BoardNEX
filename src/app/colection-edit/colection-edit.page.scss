@@ -1,0 +1,52 @@
+ion-header {
+    --background: transparent;
+    ion-toolbar {
+        --background: #C4C4C4;
+        ion-title {
+            color: black;
+        }
+    }
+}
+* {
+    color: #707070;
+}
+h1{
+    text-align: center;
+    font: 700 36px/42px Roboto;
+}
+
+#edit1 {
+    flex-direction: column;
+    padding: 0 5%;
+    p {
+        width: 90%;
+        text-align: left;
+        font: 700 24px/28px Roboto;
+    }
+    div {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+        ion-item {
+            width: 30%;
+            margin: 0 5% 3% 5%;
+            --background: transparent;
+            --padding-start: 0px;
+            ion-label {
+                max-width: none;
+                width: 100%;
+                ion-input {
+                    --background: #FFFFFF;
+                    --padding-top: 6px;
+                    --padding-bottom: 6px;
+                    border-radius: 10px;
+                    border: 2px solid #C4C4C4;
+                    margin-top: 8px;
+                }
+            }
+        }
+    }
+}

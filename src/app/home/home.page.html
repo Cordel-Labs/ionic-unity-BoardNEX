@@ -1,20 +1,15 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar><ion-title>Blank</ion-title></ion-toolbar>
+</ion-header> -->
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div id="menu"></div>
+  <div id="collection">
+    <h1>Minhas Coleções</h1>
+    <ion-input placeholder="Pesquisar coleções"></ion-input>
+    <div class="line"></div>
+    <p>Crie grupos de questões para integração ao boardNEX</p>
+    <p style="margin-top: 100px;">Você ainda não tem uma coleção</p>
+    <ion-button color="dark" (click)="editCollection()">Criar nova coleção</ion-button>
   </div>
 </ion-content>

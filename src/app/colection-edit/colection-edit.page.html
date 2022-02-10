@@ -1,0 +1,43 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>Nexus</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <ion-slides #slides pager="true" [options]="SliderOptions" (ionSlidesDidLoad)="slidesLoaded(slides)">
+    <ion-slide id="edit1">
+      <h1>Nova coleção</h1>
+      <p>Classificar coleção</p>
+      <div>
+        <ion-item lines="none"><ion-label class="ion-text-wrap">
+          <ion-text><p>Título</p></ion-text>
+          <ion-input placeholder="Digite aqui"></ion-input>
+        </ion-label></ion-item>
+        <ion-item lines="none"><ion-label class="ion-text-wrap">
+          <ion-text><p>Disciplina</p></ion-text>
+          <ion-input></ion-input>
+        </ion-label></ion-item>
+        <ion-item lines="none"><ion-label class="ion-text-wrap">
+          <ion-text><p>Curso</p></ion-text>
+          <ion-input></ion-input>
+        </ion-label></ion-item>
+        <ion-item lines="none"><ion-label class="ion-text-wrap">
+          <ion-text><p>Tema</p></ion-text>
+          <ion-input placeholder="Digite aqui"></ion-input>
+        </ion-label></ion-item>
+        <ion-item lines="none"><ion-label class="ion-text-wrap">
+          <ion-text><p>Etapa</p></ion-text>
+          <ion-input></ion-input>
+        </ion-label></ion-item>
+        <ion-item lines="none"><ion-label class="ion-text-wrap">
+          <ion-text><p>Tópico</p></ion-text>
+          <ion-input placeholder="Digite aqui"></ion-input>
+        </ion-label></ion-item>
+      </div>
+    </ion-slide>
+    <ion-slide id="edit2">
+      <h1>Coleção pica</h1>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
