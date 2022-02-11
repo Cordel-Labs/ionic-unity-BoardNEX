@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-colection-edit',
@@ -11,10 +12,10 @@ export class ColectionEditPage implements OnInit {
   SliderOptions = {
     initialSlide: 0,
     sliderPerView: 1,
-    speed: 200,
+    speed: 700,
   };
 
-  constructor() { }
+  constructor(private modalController: ModalController) { }
 
   ngOnInit() {
   }
@@ -27,7 +28,15 @@ export class ColectionEditPage implements OnInit {
   }
 
   navigateTab(dir){
+    this.currentSlide.lockSwipes(false);
+    this.currentSlide.slideTo(this.currentTab+dir);
+    this.currentSlide.lockSwipes(true);
+  }
 
+  dismiss() {
+    this.modalController.dismiss({
+      'dismissed': true
+    });
   }
 
 }

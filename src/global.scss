@@ -40,3 +40,24 @@ ion-content {
 ion-item .item-native {
     flex-direction: column;
 }
+
+.swiper-pagination {
+    pointer-events: none;
+}
+
+.swiper-pagination-bullets {
+    span {
+        border-radius: 10px;
+        height: 10px;
+        background: transparent;
+        transition: width 0.7s;
+    }
+    .swiper-pagination-bullet {
+        background-color: #605b5b;
+        width: 20px;
+    }
+    .swiper-pagination-bullet-active {
+        background-color: #606060;
+        width: 40px;
+    }
+}
