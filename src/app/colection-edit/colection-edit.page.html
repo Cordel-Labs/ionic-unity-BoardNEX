@@ -9,34 +9,34 @@
     <ion-slide id="edit1">
       <h1>Nova coleção</h1>
       <p>Classificar coleção</p>
-      <div>
+      <form [formGroup]="forms"><div>
         <ion-item lines="none"><ion-label class="ion-text-wrap">
           <ion-text><p>Título</p></ion-text>
-          <ion-input placeholder="Digite aqui"></ion-input>
+          <ion-input formControlName="titulo" placeholder="Digite aqui"></ion-input>
         </ion-label></ion-item>
         <ion-item lines="none"><ion-label class="ion-text-wrap">
           <ion-text><p>Disciplina</p></ion-text>
-          <ion-input></ion-input>
+          <ion-input formControlName="disciplina"></ion-input>
         </ion-label></ion-item>
         <ion-item lines="none"><ion-label class="ion-text-wrap">
           <ion-text><p>Curso</p></ion-text>
-          <ion-input></ion-input>
+          <ion-input formControlName="curso"></ion-input>
         </ion-label></ion-item>
         <ion-item lines="none"><ion-label class="ion-text-wrap">
           <ion-text><p>Tema</p></ion-text>
-          <ion-input placeholder="Digite aqui"></ion-input>
+          <ion-input formControlName="tema" placeholder="Digite aqui"></ion-input>
         </ion-label></ion-item>
         <ion-item lines="none"><ion-label class="ion-text-wrap">
           <ion-text><p>Etapa</p></ion-text>
-          <ion-input></ion-input>
+          <ion-input formControlName="etapa"></ion-input>
         </ion-label></ion-item>
         <ion-item lines="none"><ion-label class="ion-text-wrap">
           <ion-text><p>Tópico</p></ion-text>
-          <ion-input placeholder="Digite aqui"></ion-input>
+          <ion-input formControlName="topico" placeholder="Digite aqui"></ion-input>
         </ion-label></ion-item>
         <ion-button color="dark" (click)="dismiss()">Cancelar</ion-button>
         <ion-button color="dark" (click)="navigateTab(1)">Próxima</ion-button>
-      </div>
+      </div></form>
     </ion-slide>
     <ion-slide id="edit2">
       <h1>Coleção pica</h1>
@@ -55,7 +55,7 @@
           </ul>
         </div>
         <ion-button color="dark" (click)="navigateTab(-1)">Voltar</ion-button>
-        <ion-button color="dark" style="right: 0;" (click)="dismiss()">Salvar coleção</ion-button>
+        <ion-button color="dark" style="right: 0;" (click)="finishForms()">Salvar coleção</ion-button>
       </div>
     </ion-slide>
   </ion-slides>

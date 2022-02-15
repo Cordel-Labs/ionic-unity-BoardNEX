@@ -8,8 +8,20 @@
     <h1>Minhas Coleções</h1>
     <ion-input placeholder="Pesquisar coleções"></ion-input>
     <div class="line"></div>
-    <p>Crie grupos de questões para integração ao boardNEX</p>
-    <p style="margin-top: 100px;">Você ainda não tem uma coleção</p>
-    <ion-button color="dark" (click)="editCollection()">Criar nova coleção</ion-button>
+    <div *ngIf="colecList.length === 0">
+      <p>Crie grupos de questões para integração ao boardNEX</p>
+      <p style="margin-top: 100px;">Você ainda não tem uma coleção</p>
+      <ion-button color="dark" (click)="editCollection()">Criar nova coleção</ion-button>
+    </div>
+    <div *ngIf="colecList.length > 0" class="colecList">
+      <div>
+        <p>Título</p><p>Data de criação</p><p>Última modificação</p>
+      </div>
+      <ion-item lines="none">
+        <ion-text>Platelmintos</ion-text>
+        <ion-text>15/01/2022 16:32</ion-text>
+        <ion-text>20/02/2025 23:50</ion-text>
+      </ion-item>
+    </div>
   </div>
 </ion-content>
