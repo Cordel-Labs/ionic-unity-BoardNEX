@@ -5,58 +5,107 @@
 </ion-header> -->
 
 <ion-content>
-  <ion-slides #slides pager="true" [options]="SliderOptions" (ionSlidesDidLoad)="slidesLoaded(slides)">
-    <ion-slide id="edit1">
-      <h1>Nova coleção</h1>
-      <p>Classificar coleção</p>
-      <form [formGroup]="forms"><div>
-        <ion-item lines="none"><ion-label class="ion-text-wrap">
-          <ion-text><p>Título</p></ion-text>
-          <ion-input formControlName="titulo" placeholder="Digite aqui"></ion-input>
-        </ion-label></ion-item>
-        <ion-item lines="none"><ion-label class="ion-text-wrap">
-          <ion-text><p>Disciplina</p></ion-text>
-          <ion-input formControlName="disciplina"></ion-input>
-        </ion-label></ion-item>
-        <ion-item lines="none"><ion-label class="ion-text-wrap">
-          <ion-text><p>Curso</p></ion-text>
-          <ion-input formControlName="curso"></ion-input>
-        </ion-label></ion-item>
-        <ion-item lines="none"><ion-label class="ion-text-wrap">
-          <ion-text><p>Tema</p></ion-text>
-          <ion-input formControlName="tema" placeholder="Digite aqui"></ion-input>
-        </ion-label></ion-item>
-        <ion-item lines="none"><ion-label class="ion-text-wrap">
-          <ion-text><p>Etapa</p></ion-text>
-          <ion-input formControlName="etapa"></ion-input>
-        </ion-label></ion-item>
-        <ion-item lines="none"><ion-label class="ion-text-wrap">
-          <ion-text><p>Tópico</p></ion-text>
-          <ion-input formControlName="topico" placeholder="Digite aqui"></ion-input>
-        </ion-label></ion-item>
-        <ion-button color="dark" (click)="dismiss()">Cancelar</ion-button>
-        <ion-button color="dark" (click)="navigateTab(1)">Próxima</ion-button>
-      </div></form>
-    </ion-slide>
-    <ion-slide id="edit2">
-      <h1>Coleção pica</h1>
-      <div class="flexDiv">
-        <div>
-          <ion-input placeholder="Adicione um enunciado"></ion-input>
-          <ion-button color="light">Adicione uma imagem</ion-button>
-        </div>
-        <div></div>
-        <div>
-          <ul>
-            <li><div></div><ion-input placeholder="Digite aqui uma opção de resposta"></ion-input></li>
-            <li><div></div><ion-input placeholder="Digite aqui uma opção de resposta"></ion-input></li>
-            <li><div></div><ion-input placeholder="Digite aqui uma opção de resposta"></ion-input></li>
-            <li><div></div><ion-input placeholder="Digite aqui uma opção de resposta"></ion-input></li>
-          </ul>
-        </div>
-        <ion-button color="dark" (click)="navigateTab(-1)">Voltar</ion-button>
-        <ion-button color="dark" style="right: 0;" (click)="finishForms()">Salvar coleção</ion-button>
-      </div>
-    </ion-slide>
-  </ion-slides>
+    <ion-slides #slides pager="true" [options]="SliderOptions" (ionSlidesDidLoad)="slidesLoaded(slides)">
+        <ion-slide id="edit1">
+            <h1>Nova coleção</h1>
+            <p>Classificar coleção</p>
+            <form [formGroup]="forms">
+                <div>
+                    <ion-item lines="none">
+                        <ion-label class="ion-text-wrap">
+                            <ion-text>
+                                <p>Título</p>
+                            </ion-text>
+                            <ion-input formControlName="titulo" placeholder="Digite aqui"></ion-input>
+                        </ion-label>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-label class="ion-text-wrap">
+                            <ion-text>
+                                <p>Disciplina</p>
+                            </ion-text>
+                            <ion-input formControlName="disciplina"></ion-input>
+                        </ion-label>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-label class="ion-text-wrap">
+                            <ion-text>
+                                <p>Curso</p>
+                            </ion-text>
+                            <ion-input formControlName="curso"></ion-input>
+                        </ion-label>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-label class="ion-text-wrap">
+                            <ion-text>
+                                <p>Tema</p>
+                            </ion-text>
+                            <ion-input formControlName="tema" placeholder="Digite aqui"></ion-input>
+                        </ion-label>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-label class="ion-text-wrap">
+                            <ion-text>
+                                <p>Etapa</p>
+                            </ion-text>
+                            <ion-input formControlName="etapa"></ion-input>
+                        </ion-label>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-label class="ion-text-wrap">
+                            <ion-text>
+                                <p>Tópico</p>
+                            </ion-text>
+                            <ion-input formControlName="topico" placeholder="Digite aqui"></ion-input>
+                        </ion-label>
+                    </ion-item>
+                    <ion-button color="dark" (click)="dismiss()">Cancelar</ion-button>
+                    <ion-button color="dark" (click)="navigateTab(1)">Próxima</ion-button>
+                </div>
+            </form>
+        </ion-slide>
+        <ion-slide id="edit2">
+            <h1>Coleção pica</h1>
+            <div class="flexDiv">
+                <div>
+                    <ion-input placeholder="Adicione um enunciado"></ion-input>
+                    <ion-button color="light">Adicione uma imagem</ion-button>
+                </div>
+                <div></div>
+                <div>
+                    <ul>
+                        <li>
+                            <div></div>
+                            <ion-input placeholder="Digite aqui uma opção de resposta"></ion-input>
+                        </li>
+                        <li>
+                            <div></div>
+                            <ion-input placeholder="Digite aqui uma opção de resposta"></ion-input>
+                        </li>
+                        <li>
+                            <div></div>
+                            <ion-input placeholder="Digite aqui uma opção de resposta"></ion-input>
+                        </li>
+                        <li>
+                            <div></div>
+                            <ion-input placeholder="Digite aqui uma opção de resposta"></ion-input>
+                        </li>
+                    </ul>
+                </div>
+                <ion-button color="dark" (click)="navigateTab(-1)">Voltar</ion-button>
+                <ion-button color="dark" style="right: 0;" (click)="finishForms()">Salvar coleção</ion-button>
+            </div>
+            <div id="footMenu">
+                <div (click)="openFootMenu()">
+                    <ion-icon [name]="footMenuButton" title="abrir"></ion-icon>
+                </div>
+                <ion-row>
+                    <ion-col *ngFor="let a of ['','','','']; let i = index">
+                        <p>Questão {{i+1}}</p>
+                        <div></div>
+                    </ion-col>
+                </ion-row>
+            </div>
+        </ion-slide>
+    </ion-slides>
 </ion-content>

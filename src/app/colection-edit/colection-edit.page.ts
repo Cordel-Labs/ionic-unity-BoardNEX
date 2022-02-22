@@ -14,6 +14,8 @@ export class ColectionEditPage implements OnInit {
   newColection: Colection = null;
   currentSlide;
   currentTab = 0;
+  footMenuIsOpen = false;
+  footMenuButton = 'chevron-up-outline';
   SliderOptions = {
     initialSlide: 0,
     sliderPerView: 1,
@@ -46,9 +48,16 @@ export class ColectionEditPage implements OnInit {
     let todayDate = dd + '/' + mm + '/' + yyyy;
 
     this.newColection = new Colection(this.forms.value, todayDate);
-    // console.log(this.newColection);
+
     // this.fbApp.database().ref('nome').set(this.newColection);
     this.dismiss();
+  }
+
+  openFootMenu(){
+    const footMenu = document.getElementById('footMenu');
+    footMenu.style.bottom = (this.footMenuIsOpen) ? 'calc(-30vh + 40px)' : '0px';
+    this.footMenuIsOpen = !this.footMenuIsOpen;
+    this.footMenuButton = (this.footMenuIsOpen) ? 'chevron-down-outline' : 'chevron-up-outline';
   }
 
   async slidesLoaded(slides) {
