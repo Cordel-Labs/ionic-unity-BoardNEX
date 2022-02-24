@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FirebaseApp } from '@angular/fire';
-import { Colection } from '../class/colection';
+import { Colection, Question } from '../class/colection';
 // import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -12,6 +12,8 @@ import { Colection } from '../class/colection';
 })
 export class ColectionEditPage implements OnInit {
   newColection: Colection = null;
+  questions: Question[] = [];
+  qInd = 0;
   currentSlide;
   currentTab = 0;
   footMenuIsOpen = false;
@@ -22,6 +24,7 @@ export class ColectionEditPage implements OnInit {
     speed: 700,
   };
   public forms: FormGroup;
+  public questionForm: FormGroup;
 
   constructor(
     private modalController: ModalController,
@@ -38,6 +41,14 @@ export class ColectionEditPage implements OnInit {
       etapa: ['', [Validators.required]],
       topico: ['', [Validators.required]],
     });
+    this.questionForm = this.formBuilder.group({
+      enum: ['', [Validators.required]],
+      alter1: [''],
+      alter2: [''],
+      alter3: [''],
+      alter4: ['']
+    });
+    this.questions.push(new Question('', ['','','','']), new Question('', ['','','','']), new Question('', ['','','','']), new Question('', ['','','','']));
   }
 
   finishForms(){
@@ -47,7 +58,7 @@ export class ColectionEditPage implements OnInit {
     let yyyy = today.getFullYear();
     let todayDate = dd + '/' + mm + '/' + yyyy;
 
-    this.newColection = new Colection(this.forms.value, todayDate);
+    this.newColection = new Colection(this.forms.value, todayDate, this.questions);
 
     // this.fbApp.database().ref('nome').set(this.newColection);
     this.dismiss();
@@ -80,4 +91,16 @@ export class ColectionEditPage implements OnInit {
     });
   }
 
+  switchQuestion(ind){
+    this.questions[this.qInd].enunciado = this.questionForm.get('enum').value;
+    this.questions[this.qInd].alter = [this.questionForm.get('alter1').value, this.questionForm.get('alter2').value, this.questionForm.get('alter3').value, this.questionForm.get('alter4').value];
+    this.questionForm = this.formBuilder.group({
+      enum: [this.questions[ind].enunciado, [Validators.required]],
+      alter1: [this.questions[ind].alter[0]],
+      alter2: [this.questions[ind].alter[1]],
+      alter3: [this.questions[ind].alter[2]],
+      alter4: [this.questions[ind].alter[3]]
+    });
+    this.qInd = ind;
+  }
 }

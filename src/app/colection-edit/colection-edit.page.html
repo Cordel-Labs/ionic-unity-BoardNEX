@@ -66,9 +66,9 @@
         </ion-slide>
         <ion-slide id="edit2">
             <h1>Coleção pica</h1>
-            <div class="flexDiv">
+            <form [formGroup]="questionForm" class="flexDiv">
                 <div>
-                    <ion-input placeholder="Adicione um enunciado"></ion-input>
+                    <ion-input formControlName="enum" placeholder="Adicione um enunciado"></ion-input>
                     <ion-button color="light">Adicione uma imagem</ion-button>
                 </div>
                 <div></div>
@@ -76,31 +76,31 @@
                     <ul>
                         <li>
                             <div></div>
-                            <ion-input placeholder="Digite aqui uma opção de resposta"></ion-input>
+                            <ion-input formControlName="alter1" placeholder="Digite aqui uma opção de resposta"></ion-input>
                         </li>
                         <li>
                             <div></div>
-                            <ion-input placeholder="Digite aqui uma opção de resposta"></ion-input>
+                            <ion-input formControlName="alter2" placeholder="Digite aqui uma opção de resposta"></ion-input>
                         </li>
                         <li>
                             <div></div>
-                            <ion-input placeholder="Digite aqui uma opção de resposta"></ion-input>
+                            <ion-input formControlName="alter3" placeholder="Digite aqui uma opção de resposta"></ion-input>
                         </li>
                         <li>
                             <div></div>
-                            <ion-input placeholder="Digite aqui uma opção de resposta"></ion-input>
+                            <ion-input formControlName="alter4" placeholder="Digite aqui uma opção de resposta"></ion-input>
                         </li>
                     </ul>
                 </div>
                 <ion-button color="dark" (click)="navigateTab(-1)">Voltar</ion-button>
                 <ion-button color="dark" style="right: 0;" (click)="finishForms()">Salvar coleção</ion-button>
-            </div>
+            </form>
             <div id="footMenu">
                 <div (click)="openFootMenu()">
                     <ion-icon [name]="footMenuButton" title="abrir"></ion-icon>
                 </div>
                 <ion-row>
-                    <ion-col *ngFor="let a of ['','','','']; let i = index">
+                    <ion-col *ngFor="let a of questions; let i = index" (click)="switchQuestion(i)">
                         <p>Questão {{i+1}}</p>
                         <div></div>
                     </ion-col>

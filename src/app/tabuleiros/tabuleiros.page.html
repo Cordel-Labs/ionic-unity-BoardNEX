@@ -1,0 +1,19 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar><ion-title>Blank</ion-title></ion-toolbar>
+</ion-header> -->
+
+<ion-content [fullscreen]="true">
+    <div id="menu"></div>
+    <div id="collection">
+        <h1>Meus tabuleiros</h1>
+        <ion-input placeholder="Pesquisar tabuleiros"></ion-input>
+        <div class="line"></div>
+        <div>
+            <p></p>
+            <p style="margin-top: 100px;">Você ainda não tem um tabuleiro</p>
+            <ion-button color="dark" (click)="editCollection()">Criar nova coleção</ion-button>
+        </div>
+        <!-- <div *ngIf="colecList.length > 0" class="colecList">
+        </div> -->
+    </div>
+</ion-content>

@@ -8,7 +8,7 @@ export class Colection {
   createdDate;
   lastMod;
   questoes: Question[];
-  constructor(forms, createdDate){
+  constructor(forms, createdDate, questoes){
     this.titulo = forms.titulo;
     this.disciplina = forms.disciplina;
     this.curso = forms.curso;
@@ -17,13 +17,13 @@ export class Colection {
     this.topico = forms.topico;
     this.createdDate = createdDate;
     this.lastMod = createdDate;
-    this.questoes = [];
+    this.questoes = questoes;
   }
 }
 
 export class Question {
-  enunciado: string;
-  alter: string[];
+  public enunciado: string;
+  public alter: string[];
   constructor(enunciado, alter){
     this.enunciado = enunciado;
     this.alter = alter;

@@ -14,7 +14,11 @@ const routes: Routes = [
   {
     path: 'colection-edit',
     loadChildren: () => import('./colection-edit/colection-edit.module').then( m => m.ColectionEditPageModule)
+  },  {
+    path: 'tabuleiros',
+    loadChildren: () => import('./tabuleiros/tabuleiros.module').then( m => m.TabuleirosPageModule)
   },
+
 ];
 
 @NgModule({

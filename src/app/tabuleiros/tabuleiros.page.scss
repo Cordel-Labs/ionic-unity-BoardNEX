@@ -1,0 +1,73 @@
+#collection {
+    text-align: center;
+    width: 70%;
+    padding: 2% 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    h1 {
+        font: 700 36px/42px Roboto;
+        color: black;
+        margin-bottom: 0;
+    }
+    p {
+        font: 700 18px/21px Roboto;
+        color: #707070;
+        margin-top: 32px;
+    }
+    ion-input {
+        text-align: left;
+        --color: #606060;
+        --background: #C4C4C4;
+        border-radius: 10px;
+        width: 65%;
+        margin: 6.5% 0;
+    }
+    ion-button {
+        text-transform: none;
+    }
+    .colecList {
+        width: 100%;
+        >div {
+            padding: 0 10px;
+            height: 48px;
+        }
+        p {
+            float: left;
+            text-align: left;
+            width: 33%;
+            margin-top: 20px;
+            color: #707070;
+            font: 500 16px/21px Roboto;
+        }
+        ion-item {
+            width: 100%;
+            clear: left;
+            --padding-start: 10px;
+            --padding-end: 10px;
+            --inner-padding-end: 0;
+            --background: #C4C4C4;
+            --border-radius: 10px;
+            ion-text {
+                text-align: left;
+                width: 33%;
+                color: #000000;
+                font: 600 16px/21px Roboto;
+            }
+        }
+    }
+}
+
+.line {
+    height: 1px;
+    width: 100%;
+    background-color: black;
+}
+
+#menu {
+    width: 25%;
+    height: 100vh;
+    background-color: #C4C4C4;
+    float: left;
+}
