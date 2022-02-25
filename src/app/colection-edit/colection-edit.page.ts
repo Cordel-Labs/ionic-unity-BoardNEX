@@ -55,8 +55,7 @@ export class ColectionEditPage implements OnInit {
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');
     let mm = String(today.getMonth() + 1).padStart(2, '0');
-    let yyyy = today.getFullYear();
-    let todayDate = dd + '/' + mm + '/' + yyyy;
+    let todayDate = `${dd}/${mm}/${today.getFullYear()} ${String(today.getHours())}:${String(today.getMinutes())}`;
 
     this.newColection = new Colection(this.forms.value, todayDate, this.questions);
 

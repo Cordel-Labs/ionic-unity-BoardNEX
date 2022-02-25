@@ -5,7 +5,7 @@
 <ion-content [fullscreen]="true">
   <div id="menu">
     <img src="../../assets/Logo.png">
-    <ion-segment value="home">
+    <ion-segment [value]="'home'">
       <ion-segment-button value="home">
         <ion-label>Coleções</ion-label>
       </ion-segment-button>
@@ -30,10 +30,10 @@
       <div>
         <p>Título</p><p>Data de criação</p><p>Última modificação</p>
       </div>
-      <ion-item lines="none">
-        <ion-text>Platelmintos</ion-text>
-        <ion-text>15/01/2022 16:32</ion-text>
-        <ion-text>20/02/2025 23:50</ion-text>
+      <ion-item *ngFor="let c of colecList; let i = index" lines="none">
+        <ion-text>{{c.titulo}}</ion-text>
+        <ion-text>{{c.createdDate}}</ion-text>
+        <ion-text>{{c.lastMod}}</ion-text>
       </ion-item>
     </div>
   </div>

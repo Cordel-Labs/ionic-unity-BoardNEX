@@ -5,7 +5,7 @@
 <ion-content [fullscreen]="true">
     <div id="menu">
       <img src="../../assets/Logo.png">
-      <ion-segment value="tabuleiros">
+      <ion-segment [value]="'tabuleiros'">
         <ion-segment-button [routerLink]="['/home']" value="home">
           <ion-label>Coleções</ion-label>
         </ion-segment-button>
