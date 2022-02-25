@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { ColectionEditPage } from '../colection-edit/colection-edit.page';
 import { FirebaseApp } from '@angular/fire';
 import { Colection } from '../class/colection';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,8 @@ export class HomePage {
 
   constructor(
     private modalController: ModalController,
-    private fbApp: FirebaseApp
+    private fbApp: FirebaseApp,
+    public router: Router
     ) {}
 
   ngOnInit() {

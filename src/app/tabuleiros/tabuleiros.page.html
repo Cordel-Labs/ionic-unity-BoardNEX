@@ -3,17 +3,30 @@
 </ion-header> -->
 
 <ion-content [fullscreen]="true">
-    <div id="menu"></div>
+    <div id="menu">
+      <img src="../../assets/Logo.png">
+      <ion-segment value="tabuleiros">
+        <ion-segment-button [routerLink]="['/home']" value="home">
+          <ion-label>Coleções</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="tabuleiros">
+          <ion-label>Seus tabuleiros</ion-label>
+        </ion-segment-button>
+    </ion-segment>
+    </div>
     <div id="collection">
         <h1>Meus tabuleiros</h1>
         <ion-input placeholder="Pesquisar tabuleiros"></ion-input>
         <div class="line"></div>
-        <div>
+        <div *ngIf="boards.length === 0">
             <p></p>
             <p style="margin-top: 100px;">Você ainda não tem um tabuleiro</p>
-            <ion-button color="dark" (click)="editCollection()">Criar nova coleção</ion-button>
+            <ion-button color="dark" (click)="editCollection()">Criar novo tabuleiro</ion-button>
         </div>
-        <!-- <div *ngIf="colecList.length > 0" class="colecList">
-        </div> -->
+        <div *ngIf="boards.length > 0" class="boardList">
+          <ion-card *ngFor="let b of boards; let i = index">
+            Tabuleiro
+          </ion-card>
+        </div>
     </div>
 </ion-content>

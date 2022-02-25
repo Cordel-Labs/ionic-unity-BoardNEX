@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { ColectionEditPage } from '../colection-edit/colection-edit.page';
 import { FirebaseApp } from '@angular/fire';
 import { Colection } from '../class/colection';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tabuleiros',
@@ -10,12 +11,13 @@ import { Colection } from '../class/colection';
   styleUrls: ['./tabuleiros.page.scss'],
 })
 export class TabuleirosPage implements OnInit {
-  // colectionEdit = ColectionEditPage;
-  boards: any[] = []; // change to boards
+  colectionEdit = ColectionEditPage;
+  boards: any[] = [/*'','','',''*/]; // change to boards
 
   constructor(
     private modalController: ModalController,
-    private fbApp: FirebaseApp
+    private fbApp: FirebaseApp,
+    public router: Router
     ) {}
 
   ngOnInit() {
@@ -25,16 +27,16 @@ export class TabuleirosPage implements OnInit {
   }
 
   async editCollection(){
-    // const modal = await this.modalController.create({
-    //   component: this.colectionEdit,
-    //   cssClass: 'colectionEditPageClass',
-    // });
+    const modal = await this.modalController.create({
+      component: this.colectionEdit,
+      cssClass: 'colectionEditPageClass',
+    });
 
-    // modal.onDidDismiss().then((res) => {
-    //   if(res.data.data !== null)
-    //     this.colecList.push(res.data.data);
-    // });
+    modal.onDidDismiss().then((res) => {
+      if(res.data.data !== null)
+        this.boards.push(res.data.data);
+    });
 
-    // return await modal.present();
+    return await modal.present();
   }
 }

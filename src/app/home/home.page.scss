@@ -16,13 +16,24 @@
     color: #707070;
     margin-top: 32px;
   }
-  ion-input{
-    text-align: left;
-    --color: #606060;
-    --background: #C4C4C4;
-    border-radius: 10px;
-    width: 65%;
-    margin: 6.5% 0;
+  h1+div {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: inherit;
+    justify-content: center;
+    ion-input{
+      text-align: left;
+      --color: #606060;
+      --background: #C4C4C4;
+      border-radius: 10px;
+      width: 65%;
+      max-width: 65%;
+      margin: 6.5% 0;
+    }
+    ion-button {
+      margin-left: 70px;
+    }
   }
   ion-button{
     text-transform: none;

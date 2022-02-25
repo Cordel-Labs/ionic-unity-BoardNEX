@@ -3,10 +3,23 @@
 </ion-header> -->
 
 <ion-content [fullscreen]="true">
-  <div id="menu"></div>
+  <div id="menu">
+    <img src="../../assets/Logo.png">
+    <ion-segment value="home">
+      <ion-segment-button value="home">
+        <ion-label>Coleções</ion-label>
+      </ion-segment-button>
+      <ion-segment-button [routerLink]="['/tabuleiros']" value="tabuleiros">
+        <ion-label>Seus tabuleiros</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
   <div id="collection">
     <h1>Minhas Coleções</h1>
-    <ion-input placeholder="Pesquisar coleções"></ion-input>
+    <div>
+      <ion-input placeholder="Pesquisar coleções"></ion-input>
+      <ion-button color="dark" (click)="editCollection()" *ngIf="colecList.length > 0">Criar nova coleção</ion-button>
+    </div>
     <div class="line"></div>
     <div *ngIf="colecList.length === 0">
       <p>Crie grupos de questões para integração ao boardNEX</p>

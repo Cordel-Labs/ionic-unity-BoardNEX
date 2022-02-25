@@ -27,34 +27,19 @@
     ion-button {
         text-transform: none;
     }
-    .colecList {
+    .boardList {
         width: 100%;
-        >div {
-            padding: 0 10px;
-            height: 48px;
-        }
-        p {
-            float: left;
-            text-align: left;
-            width: 33%;
-            margin-top: 20px;
-            color: #707070;
-            font: 500 16px/21px Roboto;
-        }
-        ion-item {
-            width: 100%;
-            clear: left;
-            --padding-start: 10px;
-            --padding-end: 10px;
-            --inner-padding-end: 0;
-            --background: #C4C4C4;
-            --border-radius: 10px;
-            ion-text {
-                text-align: left;
-                width: 33%;
-                color: #000000;
-                font: 600 16px/21px Roboto;
-            }
+        padding-top: 50px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        ion-card {
+          width: 30%;
+          aspect-ratio: 1.5;
+          --background: white;
+          box-shadow: none;
+          border: 1px solid #C4C4C4;
+          border-radius: 10px;
         }
     }
 }
