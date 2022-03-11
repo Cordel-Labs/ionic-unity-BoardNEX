@@ -14,10 +14,11 @@ import { Colection, Question } from '../class/colection';
 })
 export class ColectionEditPage implements OnInit {
   newColection: Colection = null;
+  colecInd = -1;
   questions: Question[] = [];
   qInd = 0;
   rightAnswer = 0;
-  previous = 3;
+  qImg = '';
   altToggles;
   currentSlide;
   currentTab = 0;
@@ -39,22 +40,6 @@ export class ColectionEditPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.forms = this.formBuilder.group({
-      titulo: ['', [Validators.required]],
-      disciplina: ['', [Validators.required]],
-      curso: ['', [Validators.required]],
-      tema: ['', [Validators.required]],
-      etapa: ['', [Validators.required]],
-      topico: ['', [Validators.required]],
-    });
-    this.questionForm = this.formBuilder.group({
-      enum: ['', [Validators.required]],
-      alter1: [''],
-      alter2: [''],
-      alter3: [''],
-      alter4: ['']
-    });
-    this.questions.push(new Question('', ['','','',''], 0), new Question('', ['','','',''], 0), new Question('', ['','','',''], 0), new Question('', ['','','',''], 0));
     this.altToggles = document.getElementsByClassName('altToggle');
     document
       .getElementById('galleryInput')
@@ -63,6 +48,38 @@ export class ColectionEditPage implements OnInit {
           <HTMLInputElement>document.getElementById('galleryInput')
         )
       );
+    if(this.newColection !== null) {
+      this.forms = this.formBuilder.group({
+        titulo: [this.newColection.titulo, [Validators.required]],
+        disciplina: [this.newColection.disciplina, [Validators.required]],
+        curso: [this.newColection.curso, [Validators.required]],
+        tema: [this.newColection.tema, [Validators.required]],
+        etapa: [this.newColection.etapa, [Validators.required]],
+        topico: [this.newColection.topico, [Validators.required]],
+      });
+      this.questions = this.newColection.questoes;
+      this.questionForm = this.formBuilder.group({
+        enum: [this.questions[0].enunciado, [Validators.required]],
+        alter1: [this.questions[0].alter[0]], alter2: [this.questions[0].alter[1]], alter3: [this.questions[0].alter[2]], alter4: [this.questions[0].alter[3]]
+      });
+      this.rightAnswer = this.questions[0].rightAnswer;
+      this.altToggles[0].checked = false;
+      this.altToggles[this.rightAnswer].checked = true;
+    }
+    else {
+      this.forms = this.formBuilder.group({
+        titulo: ['', [Validators.required]],
+        disciplina: ['', [Validators.required]],
+        curso: ['', [Validators.required]],
+        tema: ['', [Validators.required]],
+        etapa: ['', [Validators.required]],
+        topico: ['', [Validators.required]],
+      });
+      this.questionForm = this.formBuilder.group({
+        enum: ['', [Validators.required]], alter1: [''], alter2: [''], alter3: [''], alter4: ['']
+      });
+      this.questions.push(new Question('', ['','','',''], 0), new Question('', ['','','',''], 0), new Question('', ['','','',''], 0), new Question('', ['','','',''], 0));
+    }
   }
 
   finishForms(){
@@ -74,6 +91,9 @@ export class ColectionEditPage implements OnInit {
     this.questions[this.qInd].enunciado = this.questionForm.get('enum').value;
     this.questions[this.qInd].alter = [this.questionForm.get('alter1').value, this.questionForm.get('alter2').value, this.questionForm.get('alter3').value, this.questionForm.get('alter4').value];
     this.questions[this.qInd].rightAnswer = this.rightAnswer;
+    if(this.qImg !== ''){
+      this.questions[this.qInd].image = this.qImg;
+    }
 
     this.newColection = new Colection(this.forms.value, todayDate, this.questions);
 
@@ -103,7 +123,10 @@ export class ColectionEditPage implements OnInit {
 
   dismiss() {
     this.modalController.dismiss({
-      data: this.newColection,
+      data: {
+        obj: this.newColection,
+        ind: this.colecInd
+      },
       'dismissed': true
     });
   }
@@ -114,10 +137,19 @@ export class ColectionEditPage implements OnInit {
 
   onImageSelected(event) {
     const selectedImage = event.files[0];
-    let storageTask = this.storage.upload(
-      'files/imagem(1)',
-      selectedImage
-    );
+    console.log(event.files[0]);
+    // this.qImg = `user/${this.qInd}`;
+
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.qImg = e.target.result;
+    };
+    reader.readAsDataURL(selectedImage);
+
+    // let storageTask = this.storage.upload(
+    //   this.qImg,
+    //   selectedImage
+    // );
   }
 
   changeRightAnswer(e, ind){
@@ -129,6 +161,9 @@ export class ColectionEditPage implements OnInit {
     this.questions[this.qInd].enunciado = this.questionForm.get('enum').value;
     this.questions[this.qInd].alter = [this.questionForm.get('alter1').value, this.questionForm.get('alter2').value, this.questionForm.get('alter3').value, this.questionForm.get('alter4').value];
     this.questions[this.qInd].rightAnswer = this.rightAnswer;
+    if(this.qImg !== ''){
+      this.questions[this.qInd].image = this.qImg;
+    }
     this.questionForm = this.formBuilder.group({
       enum: [this.questions[ind].enunciado, [Validators.required]],
       alter1: [this.questions[ind].alter[0]],
@@ -136,6 +171,7 @@ export class ColectionEditPage implements OnInit {
       alter3: [this.questions[ind].alter[2]],
       alter4: [this.questions[ind].alter[3]]
     });
+    this.qImg = this.questions[ind].image;
     this.changeRightAnswer(undefined, this.rightAnswer);
     this.rightAnswer = this.questions[ind].rightAnswer;
     this.altToggles[this.rightAnswer].checked = true;

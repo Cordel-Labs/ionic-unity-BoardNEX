@@ -73,7 +73,11 @@
             <form [formGroup]="questionForm" class="flexDiv">
                 <div>
                     <ion-input formControlName="enum" placeholder="Adicione um enunciado"></ion-input>
-                    <ion-button color="light" (click)="getImage()">Adicione uma imagem</ion-button>
+                    <ion-button color="light" (click)="getImage()">
+                      <input style="visibility: hidden; position: absolute; top: 0;" id="galleryInput" type="file" accept="image/*">
+                      Adicione uma imagem
+                    </ion-button>
+                    <img [src]="qImg" [hidden]="qImg === ''" style="max-height: 110px; margin-top: 10px;">
                 </div>
                 <div></div>
                 <div>
@@ -112,5 +116,4 @@
             </div>
         </ion-slide>
     </ion-slides>
-    <input style="visibility: hidden; position: absolute;" id="galleryInput" type="file" accept="image/*">
 </ion-content>

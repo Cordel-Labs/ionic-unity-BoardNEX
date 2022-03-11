@@ -26,15 +26,25 @@ export class HomePage {
     // });
   }
 
-  async editCollection(){
+  async editCollection(colec = null, ind = -1){
     const modal = await this.modalController.create({
       component: this.colectionEdit,
       cssClass: 'colectionEditPageClass',
+      componentProps: {
+        newColection: colec,
+        colecInd: ind
+      }
     });
 
     modal.onDidDismiss().then((res) => {
-      if(res.data.data !== null)
-        this.colecList.push(res.data.data);
+      console.log(res.data.data.obj);
+      if(res.data.data.obj !== null){
+        if(res.data.data.ind >= 0)
+          this.colecList[res.data.data.ind] = res.data.data.obj;
+        else
+          this.colecList.push(res.data.data.obj);
+      }
+
     });
 
     return await modal.present();

@@ -30,7 +30,7 @@
       <div>
         <p>Título</p><p>Data de criação</p><p>Última modificação</p>
       </div>
-      <div *ngFor="let c of colecList; let i = index">
+      <div *ngFor="let c of colecList; let i = index" (click)="editCollection(c, i)">
         <ion-item lines="none">
           <ion-text>{{c.titulo}}</ion-text>
           <ion-text>{{c.createdDate}}</ion-text>

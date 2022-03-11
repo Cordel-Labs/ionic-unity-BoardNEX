@@ -25,9 +25,11 @@ export class Question {
   public enunciado: string;
   public alter: string[];
   public rightAnswer: number;
-  constructor(enunciado, alter, rightAnswer){
+  public image: string;
+  constructor(enunciado, alter, rightAnswer, image = ''){
     this.enunciado = enunciado;
     this.alter = alter;
     this.rightAnswer = rightAnswer;
+    this.image = image;
   }
 }
