@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FirebaseApp } from '@angular/fire';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { Colection, Question } from '../class/colection';
+// import { AngularFireStorage } from '@angular/fire/compat/storage';
 // import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -14,6 +16,9 @@ export class ColectionEditPage implements OnInit {
   newColection: Colection = null;
   questions: Question[] = [];
   qInd = 0;
+  rightAnswer = 0;
+  previous = 3;
+  altToggles;
   currentSlide;
   currentTab = 0;
   footMenuIsOpen = false;
@@ -29,7 +34,8 @@ export class ColectionEditPage implements OnInit {
   constructor(
     private modalController: ModalController,
     private formBuilder: FormBuilder,
-    private fbApp: FirebaseApp
+    private fbApp: FirebaseApp,
+    private storage: AngularFireStorage
   ) { }
 
   ngOnInit() {
@@ -48,7 +54,15 @@ export class ColectionEditPage implements OnInit {
       alter3: [''],
       alter4: ['']
     });
-    this.questions.push(new Question('', ['','','','']), new Question('', ['','','','']), new Question('', ['','','','']), new Question('', ['','','','']));
+    this.questions.push(new Question('', ['','','',''], 0), new Question('', ['','','',''], 0), new Question('', ['','','',''], 0), new Question('', ['','','',''], 0));
+    this.altToggles = document.getElementsByClassName('altToggle');
+    document
+      .getElementById('galleryInput')
+      .addEventListener('change', () =>
+        this.onImageSelected(
+          <HTMLInputElement>document.getElementById('galleryInput')
+        )
+      );
   }
 
   finishForms(){
@@ -56,6 +70,10 @@ export class ColectionEditPage implements OnInit {
     let dd = String(today.getDate()).padStart(2, '0');
     let mm = String(today.getMonth() + 1).padStart(2, '0');
     let todayDate = `${dd}/${mm}/${today.getFullYear()} ${String(today.getHours())}:${String(today.getMinutes())}`;
+
+    this.questions[this.qInd].enunciado = this.questionForm.get('enum').value;
+    this.questions[this.qInd].alter = [this.questionForm.get('alter1').value, this.questionForm.get('alter2').value, this.questionForm.get('alter3').value, this.questionForm.get('alter4').value];
+    this.questions[this.qInd].rightAnswer = this.rightAnswer;
 
     this.newColection = new Colection(this.forms.value, todayDate, this.questions);
 
@@ -90,9 +108,27 @@ export class ColectionEditPage implements OnInit {
     });
   }
 
+  getImage(){
+    document.getElementById('galleryInput').click();
+  }
+
+  onImageSelected(event) {
+    const selectedImage = event.files[0];
+    let storageTask = this.storage.upload(
+      'files/imagem(1)',
+      selectedImage
+    );
+  }
+
+  changeRightAnswer(e, ind){
+    this.altToggles[this.rightAnswer].checked = false;
+    this.rightAnswer = ind;
+  }
+
   switchQuestion(ind){
     this.questions[this.qInd].enunciado = this.questionForm.get('enum').value;
     this.questions[this.qInd].alter = [this.questionForm.get('alter1').value, this.questionForm.get('alter2').value, this.questionForm.get('alter3').value, this.questionForm.get('alter4').value];
+    this.questions[this.qInd].rightAnswer = this.rightAnswer;
     this.questionForm = this.formBuilder.group({
       enum: [this.questions[ind].enunciado, [Validators.required]],
       alter1: [this.questions[ind].alter[0]],
@@ -100,6 +136,9 @@ export class ColectionEditPage implements OnInit {
       alter3: [this.questions[ind].alter[2]],
       alter4: [this.questions[ind].alter[3]]
     });
+    this.changeRightAnswer(undefined, this.rightAnswer);
+    this.rightAnswer = this.questions[ind].rightAnswer;
+    this.altToggles[this.rightAnswer].checked = true;
     this.qInd = ind;
   }
 }

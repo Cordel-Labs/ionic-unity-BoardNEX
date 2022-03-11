@@ -26,7 +26,7 @@ h1 {
         text-align: left;
         font: 700 24px/28px Roboto;
     }
-    div {
+    form >div {
         width: 100%;
         display: flex;
         flex-direction: row;
@@ -36,6 +36,7 @@ h1 {
         ion-item {
             width: 30%;
             margin: 0 5% 3% 5%;
+            position: relative;
             --background: transparent;
             --padding-start: 0px;
             ion-label {
@@ -50,6 +51,34 @@ h1 {
                     margin-top: 8px;
                 }
             }
+            // div {
+            //     float: right;
+            //     position: absolute;
+            //     top: 0;
+            //     right: 0;
+            //     display: inline-block;
+            //     pointer-events: all;
+            //     z-index: 100;
+            //     ion-icon {
+            //         pointer-events: none;
+            //     }
+            //     span {
+            //         visibility: hidden;
+            //         width: 120px;
+            //         background-color: black;
+            //         color: #fff;
+            //         text-align: center;
+            //         padding: 5px 0;
+            //         border-radius: 6px;
+            //         position: absolute;
+            //         top: -5px;
+            //         left: 105%;
+            //         z-index: 11;
+            //     }
+            //     &:hover span {
+            //         visibility: visible;
+            //     }
+            // }
         }
         ion-button {
             width: 20%;
@@ -116,13 +145,18 @@ h1 {
                     align-items: center;
                     justify-content: space-between;
                     margin-bottom: 15px;
-                    div {
-                        width: 35px;
-                        height: 35px;
+                    div, ion-toggle {
+                        width: 31px;
+                        height: 31px;
                         border-radius: 50%;
                         border: 2px solid #707070;
                         background: #C4C4C4;
                         margin-right: 30px;
+
+                        padding: 0;
+                        --handle-background: transparent;
+                        --handle-background-checked: transparent;
+                        --handle-box-shadow: none;
                     }
                     ion-input {
                         margin-top: 0;
@@ -173,6 +207,9 @@ h1 {
                 }
                 &:last-child {
                     margin-left: 0;
+                }
+                &.selected div {
+                    border: 2px solid black;
                 }
             }
         }

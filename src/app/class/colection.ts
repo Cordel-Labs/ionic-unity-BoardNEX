@@ -24,8 +24,10 @@ export class Colection {
 export class Question {
   public enunciado: string;
   public alter: string[];
-  constructor(enunciado, alter){
+  public rightAnswer: number;
+  constructor(enunciado, alter, rightAnswer){
     this.enunciado = enunciado;
     this.alter = alter;
+    this.rightAnswer = rightAnswer;
   }
 }

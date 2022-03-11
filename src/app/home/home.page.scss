@@ -52,23 +52,35 @@
       color: #707070;
       font: 500 16px/21px Roboto;
     }
-    ion-item {
-      width: 100%;
-      clear: left;
-      --padding-start: 10px;
-      --padding-end: 10px;
-      --inner-padding-end: 0;
-      --background: #C4C4C4;
-      --border-radius: 10px;
-      margin-bottom: 20px;
-      ion-text {
-        text-align: left;
-        width: 33%;
-        color: #000000;
-        font: 600 16px/21px Roboto;
+    div:nth-child(2){
+      margin-top: 9px;
+      padding: 0;
+      ion-item {
+        width: 100%;
+        clear: left;
+        --padding-start: 10px;
+        --padding-end: 10px;
+        --inner-padding-end: 0;
+        --background: #C4C4C4;
+        --border-radius: 10px;
+        margin-bottom: 20px;
+        overflow: visible;
+        z-index: 1;
+        ion-text {
+          z-index: 2;
+          text-align: left;
+          width: 33%;
+          color: #000000;
+          font: 600 16px/21px Roboto;
+        }
+        &:last-child{
+          margin-bottom: 0;
+        }
       }
-      &:last-child{
-        margin-bottom: 0;
+      &.opened {
+        background-color: #ABABAB;
+        height: 200px;
+        border-radius: 10px;
       }
     }
   }
