@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Component, ViewChildren  } from '@angular/core';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { ColectionEditPage } from '../colection-edit/colection-edit.page';
 import { FirebaseApp } from '@angular/fire';
 import { Colection } from '../class/colection';
@@ -14,6 +14,8 @@ export class HomePage {
   colectionEdit = ColectionEditPage;
   colecList: Colection[] = [];
 
+  @ViewChildren(PopoverController) pop: PopoverController;
+
   constructor(
     private modalController: ModalController,
     private fbApp: FirebaseApp,
@@ -24,6 +26,7 @@ export class HomePage {
     // this.fbApp.database().ref('nome').once('value').then((snapshot) => {
     //   console.log(snapshot.val());
     // });
+    console.log(this.pop);
   }
 
   async editCollection(colec = null, ind = -1){

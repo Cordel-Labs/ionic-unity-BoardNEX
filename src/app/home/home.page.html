@@ -3,41 +3,74 @@
 </ion-header> -->
 
 <ion-content [fullscreen]="true">
-  <div id="menu">
-    <img src="../../assets/Logo.png">
-    <ion-segment [value]="'home'">
-      <ion-segment-button value="home">
-        <ion-label>Coleções</ion-label>
-      </ion-segment-button>
-      <ion-segment-button [routerLink]="['/tabuleiros']" value="tabuleiros">
-        <ion-label>Seus tabuleiros</ion-label>
-      </ion-segment-button>
-    </ion-segment>
-  </div>
-  <div id="collection">
-    <h1>Minhas Coleções</h1>
-    <div>
-      <ion-input placeholder="Pesquisar coleções"></ion-input>
-      <ion-button color="dark" (click)="editCollection()" *ngIf="colecList.length > 0">Criar nova coleção</ion-button>
+    <div id="menu">
+        <img src="../../assets/Logo.png">
+        <ion-segment [value]="'home'">
+            <ion-segment-button value="home">
+                <ion-label>Coleções</ion-label>
+            </ion-segment-button>
+            <ion-segment-button [routerLink]="['/tabuleiros']" value="tabuleiros">
+                <ion-label>Seus tabuleiros</ion-label>
+            </ion-segment-button>
+        </ion-segment>
     </div>
-    <div class="line"></div>
-    <div *ngIf="colecList.length === 0">
-      <p>Crie grupos de questões para integração ao boardNEX</p>
-      <p style="margin-top: 100px;">Você ainda não tem uma coleção</p>
-      <ion-button color="dark" (click)="editCollection()">Criar nova coleção</ion-button>
+    <div id="collection">
+        <h1>Minhas Coleções</h1>
+        <div>
+            <ion-input placeholder="Pesquisar coleções"></ion-input>
+            <ion-button color="dark" (click)="editCollection()" *ngIf="colecList.length > 0">Criar nova coleção</ion-button>
+        </div>
+        <div class="line"></div>
+        <div *ngIf="colecList.length === 0">
+            <p>Crie grupos de questões para integração ao boardNEX</p>
+            <p style="margin-top: 100px;">Você ainda não tem uma coleção</p>
+            <ion-button color="dark" (click)="editCollection()">Criar nova coleção</ion-button>
+        </div>
+        <div *ngIf="colecList.length > 0" class="colecList">
+            <div>
+                <p>Título</p>
+                <p>Data de criação</p>
+                <p>Última modificação</p>
+            </div>
+            <div *ngFor="let c of colecList; let i = index">
+                <ion-item lines="none">
+                    <ion-text>{{c.titulo}}</ion-text>
+                    <ion-text>{{c.createdDate}}</ion-text>
+                    <ion-text>{{c.lastMod}}</ion-text>
+                    <div (click)="popover.present($event)">
+                        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+                    </div>
+                </ion-item>
+            </div>
+        </div>
     </div>
-    <div *ngIf="colecList.length > 0" class="colecList">
-      <div>
-        <p>Título</p><p>Data de criação</p><p>Última modificação</p>
-      </div>
-      <div *ngFor="let c of colecList; let i = index" (click)="editCollection(c, i)">
-        <ion-item lines="none">
-          <ion-text>{{c.titulo}}</ion-text>
-          <ion-text>{{c.createdDate}}</ion-text>
-          <ion-text>{{c.lastMod}}</ion-text>
-          <div></div>
-        </ion-item>
-      </div>
-    </div>
-  </div>
 </ion-content>
+<ion-popover #popover reference="event" class="colecPopover">
+    <ng-template>
+        <ion-content>
+            <ul>
+                <li>
+                    <div>
+                        <ion-icon name="pencil"></ion-icon><span>Editar</span></div>
+                </li>
+                <li>
+                    <div>
+                        <ion-icon name="copy"></ion-icon><span>Duplicar</span></div>
+                </li>
+                <li>
+                    <div>
+                        <ion-icon name="star"></ion-icon><span>Favoritar</span></div>
+                </li>
+                <li>
+                    <div>
+                        <ion-icon name="information"></ion-icon><span>Ver detalhes</span></div>
+                </li>
+                <div class="line"></div>
+                <li>
+                    <div>
+                        <ion-icon name="trash"></ion-icon><span>Excluir</span></div>
+                </li>
+            </ul>
+        </ion-content>
+    </ng-template>
+</ion-popover>

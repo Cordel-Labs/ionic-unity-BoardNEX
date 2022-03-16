@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FirebaseApp } from '@angular/fire';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -34,6 +34,7 @@ export class ColectionEditPage implements OnInit {
 
   constructor(
     private modalController: ModalController,
+    public alertController: AlertController,
     private formBuilder: FormBuilder,
     private fbApp: FirebaseApp,
     private storage: AngularFireStorage
@@ -65,6 +66,8 @@ export class ColectionEditPage implements OnInit {
       this.rightAnswer = this.questions[0].rightAnswer;
       this.altToggles[0].checked = false;
       this.altToggles[this.rightAnswer].checked = true;
+
+      document.getElementById('edit1').children.item(0).innerHTML = 'Editar Coleção';
     }
     else {
       this.forms = this.formBuilder.group({
@@ -119,6 +122,21 @@ export class ColectionEditPage implements OnInit {
     this.currentSlide.lockSwipes(false);
     this.currentSlide.slideTo(this.currentTab+dir);
     this.currentSlide.lockSwipes(true);
+  }
+
+  async cancelEdit(){
+    const alert = await this.alertController.create({
+      cssClass: 'dismissPopUp',
+      header: 'Descartar edição de coleção',
+      message: 'Você tem certeza que deseja descartar suas alterações nesta coleção? As alterações serão perdidas e não poderão ser resgatadas.',
+      backdropDismiss: false,
+      buttons: [{text: 'Cancelar', role: 'dismiss'}, 'Descartar']
+    });
+
+    await alert.present();
+    const { role } = await alert.onDidDismiss();
+    if(role !== 'dismiss')
+      this.dismiss();
   }
 
   dismiss() {

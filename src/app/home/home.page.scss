@@ -1,100 +1,144 @@
 #collection {
-  text-align: center;
-  width: 70%;
-  padding: 2% 10%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  h1 {
-    font: 700 36px/42px Roboto;
-    color: black;
-    margin-bottom: 0;
-  }
-  p{
-    font: 700 18px/21px Roboto;
-    color: #707070;
-    margin-top: 32px;
-  }
-  h1+div {
-    width: 100%;
+    text-align: center;
+    width: 70%;
+    padding: 2% 10%;
     display: flex;
-    flex-direction: row;
-    align-items: inherit;
-    justify-content: center;
-    ion-input{
-      text-align: left;
-      --color: #606060;
-      --background: #C4C4C4;
-      border-radius: 10px;
-      width: 65%;
-      max-width: 65%;
-      margin: 6.5% 0;
-    }
-    ion-button {
-      margin-left: 70px;
-    }
-  }
-  ion-button{
-    text-transform: none;
-  }
-  .colecList {
-    width: 100%;
-    >div{
-      padding: 0 10px;
-      height: 48px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    h1 {
+        font: 700 36px/42px Roboto;
+        color: black;
+        margin-bottom: 0;
     }
     p {
-      float: left;
-      text-align: left;
-      width: 33%;
-      margin-top: 20px;
-      color: #707070;
-      font: 500 16px/21px Roboto;
+        font: 700 18px/21px Roboto;
+        color: #707070;
+        margin-top: 32px;
     }
-    div:nth-child(2){
-      margin-top: 9px;
-      padding: 0;
-      ion-item {
+    h1+div {
         width: 100%;
-        clear: left;
-        --padding-start: 10px;
-        --padding-end: 10px;
-        --inner-padding-end: 0;
-        --background: #C4C4C4;
-        --border-radius: 10px;
-        margin-bottom: 20px;
-        overflow: visible;
-        z-index: 1;
-        ion-text {
-          z-index: 2;
-          text-align: left;
-          width: 33%;
-          color: #000000;
-          font: 600 16px/21px Roboto;
+        display: flex;
+        flex-direction: row;
+        align-items: inherit;
+        justify-content: center;
+        ion-input {
+            text-align: left;
+            --color: #606060;
+            --background: #C4C4C4;
+            border-radius: 10px;
+            width: 65%;
+            max-width: 65%;
+            margin: 6.5% 0;
         }
-        &:last-child{
-          margin-bottom: 0;
+        ion-button {
+            margin-left: 70px;
         }
-      }
-      &.opened {
-        background-color: #ABABAB;
-        height: 200px;
-        border-radius: 10px;
-      }
     }
-  }
+    ion-button {
+        text-transform: none;
+    }
+    .colecList {
+        width: 100%;
+        >div:first-child {
+            padding: 0 10px;
+            height: 48px;
+        }
+        p {
+            float: left;
+            text-align: left;
+            width: 33%;
+            margin-top: 20px;
+            color: #707070;
+            font: 500 16px/21px Roboto;
+        }
+        >div {
+            margin-top: 9px;
+            padding: 0;
+            ion-item {
+                width: 100%;
+                clear: left;
+                --padding-start: 10px;
+                --padding-end: 10px;
+                --inner-padding-end: 0;
+                --background: #C4C4C4;
+                --border-radius: 10px;
+                margin-bottom: 20px;
+                overflow: visible;
+                z-index: 1;
+                ion-text {
+                    z-index: 2;
+                    text-align: left;
+                    width: 33%;
+                    color: #000000;
+                    font: 600 16px/21px Roboto;
+                }
+                div {
+                    position: absolute;
+                    right: 5px;
+                    height: 21px;
+                    cursor: pointer;
+                    z-index: 3;
+                    ion-icon {
+                        color: #707070;
+                        height: 21px;
+                    }
+                }
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+            &.opened {
+                background-color: #ABABAB;
+                height: 200px;
+                border-radius: 10px;
+            }
+        }
+    }
 }
 
 .line {
-  height: 1px;
-  width: 100%;
-  background-color: black;
+    height: 1px;
+    width: 100%;
+    background-color: black;
 }
 
 #menu {
-  width: 25%;
-  height: 100vh;
-  background-color: #C4C4C4;
-  float: left;
+    width: 25%;
+    height: 100vh;
+    background-color: #C4C4C4;
+    float: left;
+}
+
+.colecPopover {
+    * {
+        color: black;
+    }
+    --width: 200px;
+    ul {
+        padding: 0;
+        li {
+            list-style-type: none;
+            list-style-type: none;
+            padding-left: 15px;
+            margin-bottom: 14px;
+            &:last-child {
+                margin: 14px 0 0 0;
+            }
+            div {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                span {
+                    font: 700 18px/20px Roboto;
+                }
+                ion-icon {
+                    margin-right: 7px;
+                }
+            }
+        }
+        .line {
+            background-color: #C4C4C4;
+        }
+    }
 }

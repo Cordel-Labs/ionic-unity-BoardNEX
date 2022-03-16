@@ -32,45 +32,44 @@
 /* Font Import */
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap');
-
 ion-content {
     --background: #F5F5F5;
 }
 
 #menu {
-  position: relative;
-  img {
-    position: absolute;
-    top: 60px;
-    left: 0;
-    right: 0;
-    margin: auto;
-  }
-  ion-segment {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    ion-segment-button {
-      --indicator-height: 0px;
-      max-height: 40px;
-      ion-label {
-        text-transform: none;
-        width: 90%;
-        text-align: left;
-        color: #707070;
-        font: 700 18px/22px Roboto;
-      }
-      &.segment-button-checked {
-        background-color: black;
-        background-color: #707070;
-        ion-label {
-          color: white;
-        }
-      }
+    position: relative;
+    img {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        margin: auto;
     }
-  }
+    ion-segment {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        ion-segment-button {
+            --indicator-height: 0px;
+            max-height: 40px;
+            ion-label {
+                text-transform: none;
+                width: 90%;
+                text-align: left;
+                color: #707070;
+                font: 700 18px/22px Roboto;
+            }
+            &.segment-button-checked {
+                background-color: black;
+                background-color: #707070;
+                ion-label {
+                    color: white;
+                }
+            }
+        }
+    }
 }
 
 .colectionEditPageClass {
@@ -102,5 +101,59 @@ ion-item .item-native {
     .swiper-pagination-bullet-active {
         background-color: #606060;
         width: 40px;
+    }
+}
+
+.dismissPopUp {
+    --max-width: none;
+    // shape
+    .alert-wrapper.sc-ion-alert-md {
+        width: 45vw;
+        --background: #ffffff;
+        border-radius: 10px;
+    }
+    // header
+    .alert-head.sc-ion-alert-md {
+        padding: 2.5vw 2.5vw 1vw 2.5vw;
+        h2 {
+            font: 700 24px/28px Roboto;
+            color: black;
+        }
+    }
+    // message
+    .alert-message.sc-ion-alert-md {
+        padding-left: 2.5vw;
+        padding-right: 2.5vw;
+        font: 400 18px/21px Roboto;
+        color: black;
+    }
+    // buttons
+    .alert-button-group.sc-ion-alert-md {
+        background-color: #EEEEEE;
+        padding: 16px 32px;
+        .alert-button.sc-ion-alert-md {
+            border-radius: 5px;
+            padding: 7px 18px;
+            margin-inline-end: 0;
+            span {
+                text-transform: none;
+                font: 700 14px/16px Roboto;
+            }
+            &:nth-child(1) {
+                border: 2px solid #C4C4C4;
+                background: transparent;
+                box-sizing: border-box;
+                span {
+                    color: #C4C4C4;
+                }
+            }
+            &:nth-child(2) {
+                background-color: #C4C4C4;
+                margin-left: 28px;
+                span {
+                    color: white;
+                }
+            }
+        }
     }
 }

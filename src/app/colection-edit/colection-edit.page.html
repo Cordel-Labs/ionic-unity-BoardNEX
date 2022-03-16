@@ -63,7 +63,7 @@
                             <ion-input formControlName="topico" placeholder="Digite aqui"></ion-input>
                         </ion-label>
                     </ion-item>
-                    <ion-button color="dark" (click)="dismiss()">Cancelar</ion-button>
+                    <ion-button color="dark" (click)="cancelEdit()">Cancelar</ion-button>
                     <ion-button color="dark" (click)="navigateTab(1)">Próxima</ion-button>
                 </div>
             </form>
@@ -74,8 +74,7 @@
                 <div>
                     <ion-input formControlName="enum" placeholder="Adicione um enunciado"></ion-input>
                     <ion-button color="light" (click)="getImage()">
-                      <input style="visibility: hidden; position: absolute; top: 0;" id="galleryInput" type="file" accept="image/*">
-                      Adicione uma imagem
+                        <input style="visibility: hidden; position: absolute; top: 0;" id="galleryInput" type="file" accept="image/*"> Adicione uma imagem
                     </ion-button>
                     <img [src]="qImg" [hidden]="qImg === ''" style="max-height: 110px; margin-top: 10px;">
                 </div>
