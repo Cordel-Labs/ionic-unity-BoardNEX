@@ -13,8 +13,7 @@ import { Router } from '@angular/router';
 export class HomePage {
   colectionEdit = ColectionEditPage;
   colecList: Colection[] = [];
-
-  @ViewChildren(PopoverController) pop: PopoverController;
+  clickedCol: number;
 
   constructor(
     private modalController: ModalController,
@@ -26,10 +25,12 @@ export class HomePage {
     // this.fbApp.database().ref('nome').once('value').then((snapshot) => {
     //   console.log(snapshot.val());
     // });
-    console.log(this.pop);
   }
 
-  async editCollection(colec = null, ind = -1){
+  async editCollection(ind = -1){
+    let colec = null;
+    if(ind >= 0)
+      colec = this.colecList[ind];
     const modal = await this.modalController.create({
       component: this.colectionEdit,
       cssClass: 'colectionEditPageClass',
@@ -51,5 +52,21 @@ export class HomePage {
     });
 
     return await modal.present();
+  }
+
+  activeDetails(ind){
+    document.getElementsByClassName('colecItem')[ind].classList.add('opened');
+  }
+
+  unactiveDetails(ind){
+    document.getElementsByClassName('colecItem')[ind].classList.remove('opened');
+  }
+
+  deleteCol(ind){
+    this.colecList.splice(ind, 1);
+  }
+
+  duplicateCol(ind){
+    this.colecList.splice(ind, 0, this.colecList[ind]);
   }
 }
