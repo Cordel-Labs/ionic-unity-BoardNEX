@@ -69,4 +69,11 @@ export class HomePage {
   duplicateCol(ind){
     this.colecList.splice(ind, 0, this.colecList[ind]);
   }
+
+  popoverOpen(selec){
+    if(selec)
+      document.getElementsByClassName('colecItem')[this.clickedCol].classList.add('clicked');
+    else
+      document.getElementsByClassName('colecItem')[this.clickedCol].classList.remove('clicked');
+  }
 }

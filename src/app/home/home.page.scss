@@ -79,15 +79,20 @@
                     color: #000000;
                     font: 600 16px/21px Roboto;
                 }
-                div {
+                >div {
                     position: absolute;
                     right: 5px;
                     height: 21px;
+                    width: 21px;
+                    border-radius: 50%;
                     cursor: pointer;
                     z-index: 3;
+                    transition: background-color .5s;
                     ion-icon {
+                        margin-left: 2.25px;
                         color: #707070;
                         height: 21px;
+                        transition: color .5s;
                     }
                 }
                 &:last-child {
@@ -142,6 +147,13 @@
                     span p {
                         line-height: 14px;
                     }
+                }
+            }
+            &.clicked ion-item div {
+                background-color: #707070;
+                border-radius: 50%;
+                ion-icon {
+                    color: white;
                 }
             }
         }

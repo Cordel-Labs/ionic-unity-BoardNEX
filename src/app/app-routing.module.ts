@@ -18,6 +18,10 @@ const routes: Routes = [
     path: 'tabuleiros',
     loadChildren: () => import('./tabuleiros/tabuleiros.module').then( m => m.TabuleirosPageModule)
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
 
 ];
 

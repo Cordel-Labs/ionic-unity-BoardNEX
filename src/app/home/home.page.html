@@ -42,17 +42,17 @@
                     </div>
                 </ion-item>
                 <div>
-                    <span><p>Titulo</p><p style="width: 85%;">Platelmintos</p></span>
-                    <span><p>Curso</p><p>Ensino Médio</p><p>Disciplina</p><p>Fátima</p></span>
-                    <span><p>Etapa</p><p>1º ano</p><p>Tema</p><p>Roberta</p></span>
-                    <span><p>Nº de questões</p><p>15</p><p>Tópico</p><p>Sandra</p></span>
-                    <ion-icon name="chevron-up-outline" (click)="unactiveDetails(i)"></ion-icon>
+                    <span><p>Titulo</p><p style="width: 85%;">{{c.titulo}}⠀</p></span>
+                    <span><p>Curso</p><p>{{c.curso}}⠀</p><p>Disciplina</p><p>{{c.disciplina}}⠀</p></span>
+                    <span><p>Etapa</p><p>{{c.etapa}}⠀</p><p>Tema</p><p>{{c.tema}}⠀</p></span>
+                    <span><p>Nº de questões</p><p>{{c.questoes.length}}⠀</p><p>Tópico</p><p>{{c.topico}}⠀</p></span>
+                    <ion-icon name="chevron-up-outline" (click)="unactiveDetails(i);"></ion-icon>
                 </div>
             </div>
         </div>
     </div>
 </ion-content>
-<ion-popover #popover reference="event" class="colecPopover">
+<ion-popover #popover reference="event" class="colecPopover" (didDismiss)="popoverOpen(false)" (willPresent)="popoverOpen(true)">
     <ng-template>
         <ion-content>
             <ul>

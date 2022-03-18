@@ -4,19 +4,22 @@
 
 <ion-content [fullscreen]="true">
     <div id="menu">
-      <img src="../../assets/Logo.png">
-      <ion-segment [value]="'tabuleiros'">
-        <ion-segment-button [routerLink]="['/home']" value="home">
-          <ion-label>Coleções</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="tabuleiros">
-          <ion-label>Seus tabuleiros</ion-label>
-        </ion-segment-button>
-    </ion-segment>
+        <img src="../../assets/Logo.png">
+        <ion-segment [value]="'tabuleiros'">
+            <ion-segment-button [routerLink]="['/home']" value="home">
+                <ion-label>Coleções</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="tabuleiros">
+                <ion-label>Seus tabuleiros</ion-label>
+            </ion-segment-button>
+        </ion-segment>
     </div>
     <div id="collection">
         <h1>Meus tabuleiros</h1>
-        <ion-input placeholder="Pesquisar tabuleiros"></ion-input>
+        <div>
+            <ion-input placeholder="Pesquisar tabuleiros"></ion-input>
+            <ion-button color="dark" (click)="editCollection()" *ngIf="boards.length > 0">Criar novo tabuleiro</ion-button>
+        </div>
         <div class="line"></div>
         <div *ngIf="boards.length === 0">
             <p></p>
@@ -24,9 +27,12 @@
             <ion-button color="dark" (click)="editCollection()">Criar novo tabuleiro</ion-button>
         </div>
         <div *ngIf="boards.length > 0" class="boardList">
-          <ion-card *ngFor="let b of boards; let i = index">
-            Tabuleiro
-          </ion-card>
+            <ion-card *ngFor="let b of boards; let i = index">
+                <ion-card-header></ion-card-header>
+                <ion-card-content>
+                    Tabuleiro
+                </ion-card-content>
+            </ion-card>
         </div>
     </div>
 </ion-content>
