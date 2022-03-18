@@ -1,5 +1,5 @@
 import { Component, ViewChildren  } from '@angular/core';
-import { ModalController, PopoverController } from '@ionic/angular';
+import { AlertController, ModalController, PopoverController } from '@ionic/angular';
 import { ColectionEditPage } from '../colection-edit/colection-edit.page';
 import { FirebaseApp } from '@angular/fire';
 import { Colection } from '../class/colection';
@@ -17,6 +17,7 @@ export class HomePage {
 
   constructor(
     private modalController: ModalController,
+    public alertController: AlertController,
     private fbApp: FirebaseApp,
     public router: Router
     ) {}
@@ -62,8 +63,19 @@ export class HomePage {
     document.getElementsByClassName('colecItem')[ind].classList.remove('opened');
   }
 
-  deleteCol(ind){
-    this.colecList.splice(ind, 1);
+  async deleteCol(ind){
+    const alert = await this.alertController.create({
+      cssClass: 'dismissPopUp',
+      header: 'Excluir coleção',
+      message: 'Você tem certeza que deseja excluir esta coleção? As alterações serão perdidas e não poderão ser resgatadas.',
+      backdropDismiss: false,
+      buttons: [{text: 'Cancelar', role: 'dismiss'}, 'Excluir']
+    });
+
+    await alert.present();
+    const { role } = await alert.onDidDismiss();
+    if(role !== 'dismiss')
+      this.colecList.splice(ind, 1);
   }
 
   duplicateCol(ind){

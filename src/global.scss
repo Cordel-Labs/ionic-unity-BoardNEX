@@ -135,6 +135,10 @@ ion-item .item-native {
             border-radius: 5px;
             padding: 7px 18px;
             margin-inline-end: 0;
+            width: 100px;
+            span {
+                justify-content: center;
+            }
             span {
                 text-transform: none;
                 font: 700 14px/16px Roboto;
