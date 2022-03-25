@@ -17,21 +17,17 @@
     <div id="collection">
         <h1>Minhas Coleções</h1>
         <div>
-            <ion-input placeholder="Pesquisar coleções"></ion-input>
-            <ion-button color="dark" (click)="editCollection()" *ngIf="colecList.length > 0">Criar nova coleção</ion-button>
+            <ion-searchbar #searchBar [(ngModel)]="searchText" (ionChange)="searchColection()" (ionFocus)="focusSearch()" (ionBlur)="focusSearch()" placeholder="Pesquisar coleções"></ion-searchbar>
+            <ion-button color="dark" (click)="editCollection()" *ngIf="colecList.length > 0 || searching">Criar nova coleção</ion-button>
         </div>
-        <div *ngIf="favouriteList.length > 0" class="favouriteLine">
+        <div *ngIf="favouritedCount > 0" class="favouriteLine">
             <p>Favoritos</p>
             <ion-icon name="star"></ion-icon>
             <div class="line" style="width: 80%;"></div>
             <ion-icon name="chevron-up-outline"></ion-icon>
         </div>
-        <div *ngIf="favouriteList.length > 0" class="colecList" style="margin-bottom: 50px;">
-            <div>
-                <p>Título</p>
-                <p>Data de criação</p>
-                <p>Última modificação</p>
-            </div>
+        <div *ngIf="favouritedCount > 0" class="colecList" style="margin-bottom: 50px;">
+            <div><p>Título</p><p>Data de criação</p><p>Última modificação</p></div>
             <div *ngFor="let c of favouriteList; let i = index" class="colecItem">
                 <ion-item lines="none">
                     <ion-text>{{c.titulo}}</ion-text>
@@ -51,7 +47,7 @@
             </div>
         </div>
         <div class="line" *ngIf="colecList.length > this.favouritedCount || colecList.length === 0"></div>
-        <div *ngIf="colecList.length === 0">
+        <div *ngIf="colecList.length === 0 && !searching">
             <p>Crie grupos de questões para integração ao boardNEX</p>
             <p style="margin-top: 100px;">Você ainda não tem uma coleção</p>
             <ion-button color="dark" (click)="editCollection()">Criar nova coleção</ion-button>
@@ -62,7 +58,7 @@
                 <p>Data de criação</p>
                 <p>Última modificação</p>
             </div>
-            <div *ngFor="let c of colecList; let i = index" [hidden]="c.favourited" class="colecItem">
+            <div *ngFor="let c of colecList; let i = index" [hidden]="c.favourited && !searching" class="colecItem">
                 <ion-item lines="none">
                     <ion-text>{{c.titulo}}</ion-text>
                     <ion-text>{{c.createdDate}}</ion-text>
@@ -97,7 +93,7 @@
                     </div>
                 </li>
                 <li>
-                    <div (click)="favouriteCol(clickedCol); popover.dismiss();">
+                    <div (click)="popover.dismiss(); favouriteCol(clickedCol);">
                         <ion-icon name="star"></ion-icon><span>Favoritar</span>
                     </div>
                 </li>

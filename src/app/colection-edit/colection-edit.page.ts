@@ -91,10 +91,6 @@ export class ColectionEditPage implements OnInit {
     let dd = String(today.getDate()).padStart(2, '0');
     let mm = String(today.getMonth() + 1).padStart(2, '0');
     let todayDate = `${dd}/${mm}/${today.getFullYear()} ${String(today.getHours())}:${String(today.getMinutes())}`;
-    if(this.newColection !== null)
-      createDate = this.newColection.createdDate;
-    else
-      createDate = todayDate;
 
     this.questions[this.qInd].enunciado = this.questionForm.get('enum').value;
     this.questions[this.qInd].alter = [this.questionForm.get('alter1').value, this.questionForm.get('alter2').value, this.questionForm.get('alter3').value, this.questionForm.get('alter4').value];
@@ -103,8 +99,10 @@ export class ColectionEditPage implements OnInit {
       this.questions[this.qInd].image = this.qImg;
     }
 
-    this.newColection = new Colection(this.forms.value, todayDate, this.questions);
-    this.newColection.createdDate = createDate;
+    if(this.newColection !== null)
+      this.newColection.editColection(this.forms.value, todayDate, this.questions);
+    else
+      this.newColection = new Colection(this.forms.value, todayDate, this.questions);
 
     // this.fbApp.database().ref('nome').set(this.newColection);
     this.dismiss();

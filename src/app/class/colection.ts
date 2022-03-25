@@ -21,6 +21,16 @@ export class Colection {
     this.questoes = questoes;
     this.favourited = false;
   }
+  editColection(forms, editedDate, questoes){
+    this.titulo = forms.titulo;
+    this.disciplina = forms.disciplina;
+    this.curso = forms.curso;
+    this.tema = forms.tema;
+    this.etapa = forms.etapa;
+    this.topico = forms.topico;
+    this.lastMod = editedDate;
+    this.questoes = questoes;
+  }
 }
 
 export class Question {

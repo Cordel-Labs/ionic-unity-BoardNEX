@@ -2,7 +2,7 @@ import { Component, ViewChildren  } from '@angular/core';
 import { AlertController, ModalController, PopoverController } from '@ionic/angular';
 import { ColectionEditPage } from '../colection-edit/colection-edit.page';
 import { FirebaseApp } from '@angular/fire';
-import { Colection } from '../class/colection';
+import { Colection, Question } from '../class/colection';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,8 +15,14 @@ export class HomePage {
   colecList: Colection[] = [];
   favouriteList: Colection[] = [];
   favouritedCount = 0;
+  searchText = '';
+
+  backupList: Colection[] = [];
+  backupFC = 0;
+  searching = false;
+
   clickedCol: number;
-  clickedElement = undefined;
+  clickedElement = null;
 
   constructor(
     private modalController: ModalController,
@@ -59,11 +65,14 @@ export class HomePage {
   }
 
   activeDetails(ind){
-    document.getElementsByClassName('colecItem')[ind].classList.add('opened');
+    this.clickedElement.classList.add('opened');
+    // document.getElementsByClassName('colecItem')[ind].classList.add('opened');
   }
 
   unactiveDetails(ind){
-    document.getElementsByClassName('colecItem')[ind].classList.remove('opened');
+    this.clickedElement.classList.remove('opened');
+    this.clickedElement = null;
+    // document.getElementsByClassName('colecItem')[ind].classList.remove('opened');
   }
 
   async deleteCol(ind){
@@ -77,29 +86,64 @@ export class HomePage {
 
     await alert.present();
     const { role } = await alert.onDidDismiss();
-    if(role !== 'dismiss')
+    if(role !== 'dismiss'){
+      if(this.colecList[ind].favourited)
+        if(this.searching)
+          this.backupFC--;
+        else
+          this.favouritedCount--;
       this.colecList.splice(ind, 1);
+    }
   }
 
   duplicateCol(ind){
-    this.colecList.splice(ind, 0, this.colecList[ind]);
+    const clone = new Colection(this.colecList[ind], this.colecList[ind].createdDate, this.colecList[ind].questoes)
+    this.colecList.splice(ind, 0, clone);
   }
 
   favouriteCol(ind){
     if(this.favouriteList.includes(this.colecList[ind])){
       this.favouriteList.splice(this.favouriteList.indexOf(this.colecList[ind]), 1);
       this.colecList[ind].favourited = false;
-      this.favouritedCount--;
+      if(this.searching)
+        this.backupFC--;
+      else
+        this.favouritedCount--;
     }
     else{
       this.favouriteList.push(this.colecList[ind]);
       this.colecList[ind].favourited = true;
-      this.favouritedCount++;
+      if(this.searching)
+        this.backupFC++;
+      else
+        this.favouritedCount++;
     }
   }
 
-  testEvent(event){
-    event.srcElement.classList.add('clicked');
+  focusSearch(){
+    if(this.searchText === '' && !this.searching){
+      console.log(this.colecList);
+      this.backupList = this.backupList.concat(this.colecList);
+      console.log(this.backupList);
+      this.backupFC = this.favouritedCount;
+      this.favouritedCount = 0;
+      this.searching = true;
+    }
+    else if(this.searchText === '' && this.searching){
+      this.colecList = [];
+      this.colecList = this.colecList.concat(this.backupList);
+      this.backupList = [];
+      this.favouritedCount = this.backupFC;
+      this.backupFC = 0;
+      this.searching = false;
+    }
+  }
+
+  searchColection(){
+    const filterText = this.searchText;
+    this.colecList = this.backupList.filter((val) => {
+      return val.titulo.includes(filterText);
+    });
   }
 
   popoverOpen(event){
