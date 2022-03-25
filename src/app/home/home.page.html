@@ -20,24 +20,54 @@
             <ion-input placeholder="Pesquisar coleções"></ion-input>
             <ion-button color="dark" (click)="editCollection()" *ngIf="colecList.length > 0">Criar nova coleção</ion-button>
         </div>
-        <div class="line"></div>
-        <div *ngIf="colecList.length === 0">
-            <p>Crie grupos de questões para integração ao boardNEX</p>
-            <p style="margin-top: 100px;">Você ainda não tem uma coleção</p>
-            <ion-button color="dark" (click)="editCollection()">Criar nova coleção</ion-button>
+        <div *ngIf="favouriteList.length > 0" class="favouriteLine">
+            <p>Favoritos</p>
+            <ion-icon name="star"></ion-icon>
+            <div class="line" style="width: 80%;"></div>
+            <ion-icon name="chevron-up-outline"></ion-icon>
         </div>
-        <div *ngIf="colecList.length > 0" class="colecList">
+        <div *ngIf="favouriteList.length > 0" class="colecList" style="margin-bottom: 50px;">
             <div>
                 <p>Título</p>
                 <p>Data de criação</p>
                 <p>Última modificação</p>
             </div>
-            <div *ngFor="let c of colecList; let i = index" class="colecItem">
+            <div *ngFor="let c of favouriteList; let i = index" class="colecItem">
                 <ion-item lines="none">
                     <ion-text>{{c.titulo}}</ion-text>
                     <ion-text>{{c.createdDate}}</ion-text>
                     <ion-text>{{c.lastMod}}</ion-text>
-                    <div (click)="popover.present($event); clickedCol = i;">
+                    <div (click)="popoverOpen($event); popover.present($event); clickedCol = colecList.indexOf(c);">
+                        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+                    </div>
+                </ion-item>
+                <div>
+                    <span><p>Titulo</p><p style="width: 85%;">{{c.titulo}}⠀</p></span>
+                    <span><p>Curso</p><p>{{c.curso}}⠀</p><p>Disciplina</p><p>{{c.disciplina}}⠀</p></span>
+                    <span><p>Etapa</p><p>{{c.etapa}}⠀</p><p>Tema</p><p>{{c.tema}}⠀</p></span>
+                    <span><p>Nº de questões</p><p>{{c.questoes.length}}⠀</p><p>Tópico</p><p>{{c.topico}}⠀</p></span>
+                    <ion-icon name="chevron-up-outline" (click)="unactiveDetails(i);"></ion-icon>
+                </div>
+            </div>
+        </div>
+        <div class="line" *ngIf="colecList.length > this.favouritedCount || colecList.length === 0"></div>
+        <div *ngIf="colecList.length === 0">
+            <p>Crie grupos de questões para integração ao boardNEX</p>
+            <p style="margin-top: 100px;">Você ainda não tem uma coleção</p>
+            <ion-button color="dark" (click)="editCollection()">Criar nova coleção</ion-button>
+        </div>
+        <div *ngIf="colecList.length > this.favouritedCount" class="colecList">
+            <div>
+                <p>Título</p>
+                <p>Data de criação</p>
+                <p>Última modificação</p>
+            </div>
+            <div *ngFor="let c of colecList; let i = index" [hidden]="c.favourited" class="colecItem">
+                <ion-item lines="none">
+                    <ion-text>{{c.titulo}}</ion-text>
+                    <ion-text>{{c.createdDate}}</ion-text>
+                    <ion-text>{{c.lastMod}}</ion-text>
+                    <div (click)="popoverOpen($event); popover.present($event); clickedCol = colecList.indexOf(c);">
                         <ion-icon name="ellipsis-vertical-outline"></ion-icon>
                     </div>
                 </ion-item>
@@ -52,7 +82,7 @@
         </div>
     </div>
 </ion-content>
-<ion-popover #popover reference="event" class="colecPopover" (didDismiss)="popoverOpen(false)" (willPresent)="popoverOpen(true)">
+<ion-popover #popover reference="event" class="colecPopover" (didDismiss)="popoverOpen(undefined)">
     <ng-template>
         <ion-content>
             <ul>
@@ -67,7 +97,7 @@
                     </div>
                 </li>
                 <li>
-                    <div>
+                    <div (click)="favouriteCol(clickedCol); popover.dismiss();">
                         <ion-icon name="star"></ion-icon><span>Favoritar</span>
                     </div>
                 </li>

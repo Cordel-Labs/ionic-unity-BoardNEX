@@ -7,6 +7,7 @@ export class Colection {
   topico;
   createdDate;
   lastMod;
+  favourited;
   questoes: Question[];
   constructor(forms, createdDate, questoes){
     this.titulo = forms.titulo;
@@ -18,6 +19,7 @@ export class Colection {
     this.createdDate = createdDate;
     this.lastMod = createdDate;
     this.questoes = questoes;
+    this.favourited = false;
   }
 }
 

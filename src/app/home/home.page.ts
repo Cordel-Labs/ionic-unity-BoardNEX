@@ -13,7 +13,10 @@ import { Router } from '@angular/router';
 export class HomePage {
   colectionEdit = ColectionEditPage;
   colecList: Colection[] = [];
+  favouriteList: Colection[] = [];
+  favouritedCount = 0;
   clickedCol: number;
+  clickedElement = undefined;
 
   constructor(
     private modalController: ModalController,
@@ -82,10 +85,30 @@ export class HomePage {
     this.colecList.splice(ind, 0, this.colecList[ind]);
   }
 
-  popoverOpen(selec){
-    if(selec)
-      document.getElementsByClassName('colecItem')[this.clickedCol].classList.add('clicked');
-    else
-      document.getElementsByClassName('colecItem')[this.clickedCol].classList.remove('clicked');
+  favouriteCol(ind){
+    if(this.favouriteList.includes(this.colecList[ind])){
+      this.favouriteList.splice(this.favouriteList.indexOf(this.colecList[ind]), 1);
+      this.colecList[ind].favourited = false;
+      this.favouritedCount--;
+    }
+    else{
+      this.favouriteList.push(this.colecList[ind]);
+      this.colecList[ind].favourited = true;
+      this.favouritedCount++;
+    }
+  }
+
+  testEvent(event){
+    event.srcElement.classList.add('clicked');
+  }
+
+  popoverOpen(event){
+    if(event !== undefined){
+      this.clickedElement = event.srcElement.parentElement.parentElement.parentElement;
+      this.clickedElement.classList.add('clicked');
+    }
+    else{
+      this.clickedElement.classList.remove('clicked');
+    }
   }
 }

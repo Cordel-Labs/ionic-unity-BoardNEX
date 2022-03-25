@@ -158,6 +158,21 @@
             }
         }
     }
+    .favouriteLine {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 1px;
+        p {
+            margin: 0;
+            color: black;
+            font: 600 18px/21px Roboto;
+        }
+        ion-icon {
+            color: black;
+        }
+    }
 }
 
 .line {
