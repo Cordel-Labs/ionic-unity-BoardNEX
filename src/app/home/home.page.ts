@@ -16,6 +16,7 @@ export class HomePage {
   favouriteList: Colection[] = [];
   favouritedCount = 0;
   searchText = '';
+  favText = 'Favoritar';
 
   backupList: Colection[] = [];
   backupFC = 0;
@@ -51,14 +52,12 @@ export class HomePage {
     });
 
     modal.onDidDismiss().then((res) => {
-      console.log(res.data.data.obj);
       if(res.data.data.obj !== null){
         if(res.data.data.ind >= 0)
           this.colecList[res.data.data.ind] = res.data.data.obj;
         else
           this.colecList.push(res.data.data.obj);
       }
-
     });
 
     return await modal.present();
@@ -146,10 +145,23 @@ export class HomePage {
     });
   }
 
-  popoverOpen(event){
+  popoverText(ind){
+    if(this.colecList[ind].favourited)
+      this.favText = "Desfavoritar";
+    else
+      this.favText = "Favoritar";
+  }
+
+  popoverOpen(event, pop = null){
     if(event !== undefined){
       this.clickedElement = event.srcElement.parentElement.parentElement.parentElement;
       this.clickedElement.classList.add('clicked');
+      if(event.clientY >= 450){
+        pop.present({clientX : event.clientX, clientY: event.clientY - 205});
+      }
+      else {
+        pop.present(event);
+      }
     }
     else{
       this.clickedElement.classList.remove('clicked');

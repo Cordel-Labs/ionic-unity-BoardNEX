@@ -22,11 +22,13 @@
         flex-direction: row;
         align-items: inherit;
         justify-content: center;
-        ion-input {
+        ion-input,
+        ion-searchbar {
             text-align: left;
             --color: #606060;
             --background: #C4C4C4;
-            border-radius: 10px;
+            --border-radius: 10px;
+            --box-shadow: none;
             width: 65%;
             max-width: 65%;
             margin: 6.5% 0;
@@ -40,7 +42,7 @@
     }
     .boardList {
         width: 100%;
-        padding-top: 50px;
+        padding-top: 25px;
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-start;
@@ -59,9 +61,44 @@
                 background-color: white;
                 padding: 3px 10px;
                 text-align: left;
-                color: black;
-                font: 600 14px/21px Roboto;
+                height: 20%;
+                span {
+                    color: black;
+                    font: 600 14px/21px Roboto;
+                }
+                >div {
+                    position: absolute;
+                    right: 5px;
+                    top: 3px;
+                    height: 21px;
+                    width: 21px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    z-index: 3;
+                    transition: background-color .5s;
+                    ion-icon {
+                        margin-left: 2.25px;
+                        color: #707070;
+                        height: 21px;
+                        transition: color .5s;
+                    }
+                }
             }
+        }
+    }
+    .favouriteLine {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 1px;
+        p {
+            margin: 0;
+            color: black;
+            font: 600 18px/21px Roboto;
+        }
+        ion-icon {
+            color: black;
         }
     }
 }
@@ -77,4 +114,38 @@
     height: 100vh;
     background-color: #C4C4C4;
     float: left;
+}
+
+.colecPopover {
+    --backdrop-opacity: 0;
+    * {
+        color: black;
+    }
+    --width: 200px;
+    ul {
+        padding: 0;
+        li {
+            list-style-type: none;
+            list-style-type: none;
+            padding-left: 15px;
+            margin-bottom: 14px;
+            &:last-child {
+                margin: 14px 0 0 0;
+            }
+            div {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                span {
+                    font: 700 18px/20px Roboto;
+                }
+                ion-icon {
+                    margin-right: 7px;
+                }
+            }
+        }
+        .line {
+            background-color: #C4C4C4;
+        }
+    }
 }

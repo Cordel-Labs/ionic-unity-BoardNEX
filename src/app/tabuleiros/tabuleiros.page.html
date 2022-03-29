@@ -17,22 +17,78 @@
     <div id="collection">
         <h1>Meus tabuleiros</h1>
         <div>
-            <ion-input placeholder="Pesquisar tabuleiros"></ion-input>
-            <ion-button color="dark" (click)="editCollection()" *ngIf="boards.length > 0">Criar novo tabuleiro</ion-button>
+            <ion-searchbar #searchBar [(ngModel)]="searchText" (ionChange)="searchColection()" (ionFocus)="focusSearch()" (ionBlur)="focusSearch()" placeholder="Pesquisar coleções"></ion-searchbar>
+            <ion-button color="dark" (click)="editCollection()" *ngIf="boards.length > 0 || searching">Criar novo tabuleiro</ion-button>
         </div>
-        <div class="line"></div>
-        <div *ngIf="boards.length === 0">
-            <p></p>
-            <p style="margin-top: 100px;">Você ainda não tem um tabuleiro</p>
-            <ion-button color="dark" (click)="editCollection()">Criar novo tabuleiro</ion-button>
-        </div>
-        <div *ngIf="boards.length > 0" class="boardList">
-            <ion-card *ngFor="let b of boards; let i = index">
-                <ion-card-header></ion-card-header>
-                <ion-card-content>
-                    Tabuleiro
-                </ion-card-content>
-            </ion-card>
+        <div class="externDiv">
+            <div *ngIf="favouritedCount > 0" class="favouriteLine">
+                <p>Favoritos</p>
+                <ion-icon name="star"></ion-icon>
+                <div class="line" style="width: 80%;"></div>
+                <ion-icon name="chevron-up-outline"></ion-icon>
+            </div>
+            <div *ngIf="favouritedCount > 0" class="boardList" style="margin-bottom: 25px;">
+                <ion-card *ngFor="let b of favouriteList; let i = index">
+                    <ion-card-header></ion-card-header>
+                    <ion-card-content>
+                        <span> {{b.titulo}}</span>
+                        <div (click)="popoverOpen($event, popover); clickedCol = boards.indexOf(b);">
+                            <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+                        </div>
+                    </ion-card-content>
+                </ion-card>
+            </div>
+            <div class="line" *ngIf="boards.length > this.favouritedCount || boards.length === 0"></div>
+            <div *ngIf="boards.length === 0 && !searching">
+                <p></p>
+                <p style="margin-top: 100px;">Você ainda não tem um tabuleiro</p>
+                <ion-button color="dark" (click)="editCollection()">Criar novo tabuleiro</ion-button>
+            </div>
+            <div *ngIf="boards.length > this.favouritedCount" class="boardList">
+                <ion-card *ngFor="let b of boards; let i = index" [hidden]="b.favourited && !searching">
+                    <ion-card-header></ion-card-header>
+                    <ion-card-content>
+                        <span> {{b.titulo}}</span>
+                        <div (click)="popoverOpen($event, popover); clickedCol = boards.indexOf(b);">
+                            <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+                        </div>
+                    </ion-card-content>
+                </ion-card>
+            </div>
         </div>
     </div>
 </ion-content>
+<ion-popover #popover reference="event" class="colecPopover" (willPresent)="popoverText(clickedCol)" (didDismiss)="popoverOpen(undefined)">
+    <ng-template>
+        <ion-content>
+            <ul>
+                <li>
+                    <div (click)="editCollection(clickedCol); popover.dismiss();">
+                        <ion-icon name="pencil"></ion-icon><span>Editar</span>
+                    </div>
+                </li>
+                <li>
+                    <div (click)="duplicateCol(clickedCol); popover.dismiss();">
+                        <ion-icon name="copy"></ion-icon><span>Duplicar</span>
+                    </div>
+                </li>
+                <li>
+                    <div (click)="popover.dismiss(); favouriteCol(clickedCol);">
+                        <ion-icon name="star"></ion-icon><span>{{favText}}</span>
+                    </div>
+                </li>
+                <li>
+                    <div (click)="activeDetails(clickedCol); popover.dismiss();">
+                        <ion-icon name="information"></ion-icon><span>Ver detalhes</span>
+                    </div>
+                </li>
+                <div class="line"></div>
+                <li>
+                    <div (click)="deleteCol(clickedCol); popover.dismiss();">
+                        <ion-icon name="trash"></ion-icon><span>Excluir</span>
+                    </div>
+                </li>
+            </ul>
+        </ion-content>
+    </ng-template>
+</ion-popover>
