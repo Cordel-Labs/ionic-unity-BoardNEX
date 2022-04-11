@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Camada 1
+  m_Name: cenario6
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 7891edb2788ac3546bbda1ad8c80e740, type: 3}
+  m_Sprite: {fileID: -6508149884694460796, guid: a682c0628bb4fc34985e72addac12ca1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

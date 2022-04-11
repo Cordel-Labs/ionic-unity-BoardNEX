@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: cenarioSpriteSheet_1
+  m_Name: path4
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: -7123455761403384509, guid: a682c0628bb4fc34985e72addac12ca1, type: 3}
+  m_Sprite: {fileID: -1259408508766424310, guid: b13c923224b72b94a9023cbebdad020a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
