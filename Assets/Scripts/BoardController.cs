@@ -7,34 +7,45 @@ public class BoardController : MonoBehaviour
 {
     [SerializeField] private Tilemap board;
     [SerializeField] private TileBase[] scTiles, pathTiles;
+    private List<Vector3Int> tilePath = new List<Vector3Int>();
     private Vector3Int pos, prevSet, cTile = new Vector3Int(100, 100, 0);
     private Vector3 mousePos;
-    private TileBase cTileObj;
-    private int st = 0;
+    private TileBase cTileObj, preview, st;
+    // private int st = 0;
     private bool firstTile = true;
 
     void Start(){
         // StartCoroutine("GenerateBoard");
+        st = pathTiles[0];
     }
 
     void Update(){
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         pos = board.WorldToCell(mousePos) + new Vector3Int(0, 0, 10);
         if(pos != cTile){
-            board.SetEditorPreviewTile(cTile, null);
-            if((cTileObj = board.GetTile(pos)) && st == 0 && (firstTile || cTileObj.name == "pathClear")){
-                board.SetEditorPreviewTile(pos, pathTiles[st]);
+            board.SetEditorPreviewTile(cTile, (preview) ? preview : null);
+            preview = board.GetEditorPreviewTile(pos);
+            if((cTileObj = board.GetTile(pos)) && st.name == "path0" && (firstTile || (preview && preview.name == "PathClear"))){
+                // tile de caminho
+                board.SetEditorPreviewTile(pos, st);
             }
-            else if(cTileObj && cTileObj.name == "path0"){
-                board.SetEditorPreviewTile(pos, pathTiles[st]);
+            else if(cTileObj && cTileObj.name == "path0" && st.name != "path0"){
+                // tiles no caminho
+                board.SetEditorPreviewTile(pos, st);
+            }
+            else if(cTileObj && st.name == "cenario0" && cTileObj.name.Contains("path")){
+                // eraser
+                board.SetEditorPreviewTile(pos, st);
             }
             cTile = pos;
-            // board.RemoveTileFlags(pos + new Vector3Int(0, 0, 10), TileFlags.LockColor);
-            // board.SetColor(pos + new Vector3Int(0, 0, 10), new Color(255, 0, 0));
         }
-        if(Input.GetMouseButtonDown(0) && board.HasEditorPreviewTile(pos)){
-            board.SetTile(pos, pathTiles[st]);
-            LockTiles(pos);
+        if(Input.GetMouseButtonDown(0) && board.HasEditorPreviewTile(pos) && board.GetEditorPreviewTile(pos).name == st.name){
+            board.SetTile(pos, st);
+            board.SetEditorPreviewTile(pos, null);
+            if(st.name == "path0"){
+                tilePath.Add(pos);
+                LockTiles(pos);
+            }
         }
     }
 
@@ -47,16 +58,34 @@ public class BoardController : MonoBehaviour
             Vector3 rot = Quaternion.Euler(0, 0, 60 * i) * new Vector3(0, .5f, 0);
             var target = board.WorldToCell(board.CellToLocal(center) + rot);
             TileBase targetTile = board.GetTile(target);
-            if(targetTile && targetTile.name != "pathBlock" && targetTile.name != "path0"){
-                board.SetTile(target, pathTiles[state]);
+            preview = board.GetEditorPreviewTile(target);
+            if(targetTile && targetTile.name != "path0" && !(preview && preview.name == "PathBlock")){
+                board.SetEditorPreviewTile(target, pathTiles[state]);
             }
         }
+        preview = null;
         prevSet = center;
         firstTile = false;
     }
 
     // Change the selected Tile to add
-    public void ChangeSelection(int ind) => st = ind;
+    public void PathSelection(int ind){
+        if(ind == 0 && st.name != "path0" && tilePath.Count > 0){
+            if(tilePath.Count > 1){
+                for(int i = 0; i < tilePath.Count - 1; i++){
+                    LockTiles(tilePath[i], 7);
+                }
+            }
+            firstTile = true;
+            LockTiles(tilePath[tilePath.Count - 1]);
+        }
+        st = pathTiles[ind];
+    }
+
+    public void ScenarioSelection(int ind){
+        st = scTiles[ind];
+        board.ClearAllEditorPreviewTiles();
+    } 
 
     public void GenerateScenario() => StartCoroutine("GenerateBoard");
 
