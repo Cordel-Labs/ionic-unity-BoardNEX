@@ -6,6 +6,8 @@ public class PanelsNavigation : MonoBehaviour
 {
     private int currentPanel = 0;
     [SerializeField] GameObject[] panels;
+    [SerializeField] private Animator containerAnimator;
+    private bool active = true;
 
     public void confirm()
     {
@@ -22,5 +24,11 @@ public class PanelsNavigation : MonoBehaviour
         panels[currentPanel].GetComponent<Animator>().SetBool("active", false);
         currentPanel--;
         panels[currentPanel].GetComponent<Animator>().SetBool("active", true);
+    }
+
+    public void toggleUI()
+    {
+        active = !active;
+        containerAnimator.SetBool("active", active);
     }
 }
