@@ -22,6 +22,7 @@ public class BoardController : MonoBehaviour
     void Update(){
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         pos = board.WorldToCell(mousePos) + new Vector3Int(0, 0, 10);
+        
         if(pos != cTile){
             board.SetEditorPreviewTile(cTile, (preview) ? preview : null);
             preview = board.GetEditorPreviewTile(pos);
