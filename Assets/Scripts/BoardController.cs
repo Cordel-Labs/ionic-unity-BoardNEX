@@ -8,23 +8,36 @@ public class BoardController : MonoBehaviour
     [SerializeField] private Tilemap board;
     [SerializeField] private TileBase[] scTiles, pathTiles;
     private List<Vector3Int> tilePath = new List<Vector3Int>();
-    private Vector3Int pos, prevSet, cTile = new Vector3Int(100, 100, 0);
+    private Vector3Int pos, prevSet, currentTile = new Vector3Int(100, 100, 0);
     private Vector3 mousePos;
     private TileBase cTileObj, preview, st;
     // private int st = 0;
     private bool firstTile = true;
+    
+    private readonly Dictionary<string, TileBase> tilesTypes = new Dictionary<string, TileBase>();
 
-    void Start(){
+    void Start()
+    {
         // StartCoroutine("GenerateBoard");
         st = pathTiles[0];
+
+        foreach (var pathTile in pathTiles)
+        {
+            tilesTypes.Add(pathTile.name, pathTile);
+        }
+
+        foreach (var tile in scTiles)
+        {
+            tilesTypes.Add(tile.name, tile);
+        }
     }
 
     void Update(){
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         pos = board.WorldToCell(mousePos) + new Vector3Int(0, 0, 10);
         
-        if(pos != cTile){
-            board.SetEditorPreviewTile(cTile, (preview) ? preview : null);
+        if(pos != currentTile){
+            board.SetEditorPreviewTile(currentTile, (preview) ? preview : null);
             preview = board.GetEditorPreviewTile(pos);
             if((cTileObj = board.GetTile(pos)) && st.name == "path0" && (firstTile || (preview && preview.name == "PathClear"))){
                 // tile de caminho
@@ -38,8 +51,9 @@ public class BoardController : MonoBehaviour
                 // eraser
                 board.SetEditorPreviewTile(pos, st);
             }
-            cTile = pos;
+            currentTile = pos;
         }
+        
         if(Input.GetMouseButtonDown(0) && board.HasEditorPreviewTile(pos) && board.GetEditorPreviewTile(pos).name == st.name){
             board.SetTile(pos, st);
             board.SetEditorPreviewTile(pos, null);
@@ -70,8 +84,8 @@ public class BoardController : MonoBehaviour
     }
 
     // Change the selected Tile to add
-    public void PathSelection(int ind){
-        if(ind == 0 && st.name != "path0" && tilePath.Count > 0){
+    public void PathSelection(string name){
+        if(name == "path0" && st.name != "path0" && tilePath.Count > 0){
             if(tilePath.Count > 1){
                 for(int i = 0; i < tilePath.Count - 1; i++){
                     LockTiles(tilePath[i], 7);
@@ -80,11 +94,12 @@ public class BoardController : MonoBehaviour
             firstTile = true;
             LockTiles(tilePath[tilePath.Count - 1]);
         }
-        st = pathTiles[ind];
+        st = tilesTypes[name];
     }
-
-    public void ScenarioSelection(int ind){
-        st = scTiles[ind];
+    
+    public void ScenarioSelection(string name)
+    {
+        st = tilesTypes[name];
         board.ClearAllEditorPreviewTiles();
     } 
 

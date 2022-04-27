@@ -968,9 +968,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 11500000, guid: 63ef7a4d0f11e1b43b1373a400378b6d, type: 3}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
-        m_MethodName: PathSelection
+        m_MethodName: 
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1703,16 +1703,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6013861847750502866, guid: e6565a44bf8664a46b99a021e55eebf5, type: 3}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
         m_MethodName: ScenarioSelection
-        m_Mode: 3
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: cenario0
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &6750412284697997811
@@ -2233,9 +2233,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6013861847750502867, guid: e6565a44bf8664a46b99a021e55eebf5, type: 3}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
-        m_MethodName: ScenarioSelection
+        m_MethodName: 
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2438,9 +2438,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6013861847750502867, guid: e6565a44bf8664a46b99a021e55eebf5, type: 3}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
-        m_MethodName: ScenarioSelection
+        m_MethodName: 
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2643,9 +2643,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 11500000, guid: 63ef7a4d0f11e1b43b1373a400378b6d, type: 3}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
-        m_MethodName: PathSelection
+        m_MethodName: 
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2997,16 +2997,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6013861847750502866, guid: e6565a44bf8664a46b99a021e55eebf5, type: 3}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
         m_MethodName: PathSelection
-        m_Mode: 3
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: path0
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &6750412285289962806
@@ -3202,9 +3202,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6013861847750502867, guid: e6565a44bf8664a46b99a021e55eebf5, type: 3}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
-        m_MethodName: PathSelection
+        m_MethodName: 
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3432,9 +3432,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6013861847750502867, guid: e6565a44bf8664a46b99a021e55eebf5, type: 3}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
-        m_MethodName: ScenarioSelection
+        m_MethodName: 
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3902,9 +3902,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6013861847750502867, guid: e6565a44bf8664a46b99a021e55eebf5, type: 3}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
-        m_MethodName: PathSelection
+        m_MethodName: 
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4107,9 +4107,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6013861847750502867, guid: e6565a44bf8664a46b99a021e55eebf5, type: 3}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
-        m_MethodName: ScenarioSelection
+        m_MethodName: 
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4240,9 +4240,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 11500000, guid: 63ef7a4d0f11e1b43b1373a400378b6d, type: 3}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
-        m_MethodName: ScenarioSelection
+        m_MethodName: 
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4373,9 +4373,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6013861847750502867, guid: e6565a44bf8664a46b99a021e55eebf5, type: 3}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
-        m_MethodName: ScenarioSelection
+        m_MethodName: 
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4650,9 +4650,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6013861847750502867, guid: e6565a44bf8664a46b99a021e55eebf5, type: 3}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
-        m_MethodName: ScenarioSelection
+        m_MethodName: 
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
