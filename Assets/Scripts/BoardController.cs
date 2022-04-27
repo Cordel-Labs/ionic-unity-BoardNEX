@@ -85,7 +85,7 @@ public class BoardController : MonoBehaviour
 
     // Change the selected Tile to add
     public void PathSelection(string name){
-        if(name == "path0" && st.name != "path0" && tilePath.Count > 0){
+        if(name == "path0" && st && st.name != "path0" && tilePath.Count > 0){
             if(tilePath.Count > 1){
                 for(int i = 0; i < tilePath.Count - 1; i++){
                     LockTiles(tilePath[i], 7);
@@ -96,12 +96,17 @@ public class BoardController : MonoBehaviour
         }
         st = tilesTypes[name];
     }
-    
+
     public void ScenarioSelection(string name)
     {
+        foreach (var key in tilesTypes.Keys)
+        {
+            print(key);
+        }
+        
         st = tilesTypes[name];
         board.ClearAllEditorPreviewTiles();
-    } 
+    }
 
     public void GenerateScenario() => StartCoroutine("GenerateBoard");
 

@@ -1221,7 +1221,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6750412284313294886}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2812590161249536658}
+        m_TargetAssemblyTypeName: PanelsNavigation, Assembly-CSharp
+        m_MethodName: confirm
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6750412284357549289
 GameObject:
   m_ObjectHideFlags: 0
@@ -2775,7 +2787,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6750412285089575642}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2812590161249536658}
+        m_TargetAssemblyTypeName: PanelsNavigation, Assembly-CSharp
+        m_MethodName: delete
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6750412285152765424
 GameObject:
   m_ObjectHideFlags: 0
@@ -3432,16 +3456,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6013861847750502867, guid: e6565a44bf8664a46b99a021e55eebf5, type: 3}
+      - m_Target: {fileID: 6013861847750502866, guid: e6565a44bf8664a46b99a021e55eebf5, type: 3}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 3
+        m_MethodName: PathSelection
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: path1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &6750412285628737862
@@ -4106,19 +4130,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6750412285961548313}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6013861847750502867, guid: e6565a44bf8664a46b99a021e55eebf5, type: 3}
-        m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &6750412285992289612
 GameObject:
   m_ObjectHideFlags: 0
