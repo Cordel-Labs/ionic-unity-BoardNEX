@@ -97,15 +97,24 @@ public class BoardController : MonoBehaviour
 
     // Change the selected Tile to add
     public void PathSelection(string name){
-        if(name == "path0" && tilePath.Count > 0 && !(st && st.name == "path0")){
-            if(tilePath.Count > 1){
-                for(int i = 0; i < tilePath.Count - 1; i++){
+        if (tilePath.Count == 0)
+        {
+            firstTile = true;
+        }
+        
+        if (name == "path0" && tilePath.Count > 0 && !(st && st.name == "path0"))
+        {
+            if (tilePath.Count > 1)
+            {
+                for (int i = 0; i < tilePath.Count - 1; i++)
+                {
                     LockTiles(tilePath[i], 7);
                 }
             }
-            firstTile = true;
+
             LockTiles(tilePath[tilePath.Count - 1]);
         }
+
         st = tilesTypes[name];
     }
 
