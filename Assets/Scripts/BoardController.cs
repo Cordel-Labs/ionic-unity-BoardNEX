@@ -33,7 +33,7 @@ public class BoardController : MonoBehaviour
     }
 
     void Update(){
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (Camera.main != null) mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         pos = board.WorldToCell(mousePos) + new Vector3Int(0, 0, 10);
         
         if(pos != currentTile && st){
@@ -43,12 +43,16 @@ public class BoardController : MonoBehaviour
                 // tile de caminho
                 board.SetEditorPreviewTile(pos, st);
             }
-            else if(cTileObj && cTileObj.name == "path0" && st.name != "path0"){
+            else if(cTileObj && cTileObj.name == "path0" && st.name != "path0" && !st.name.Contains("cenario")){
                 // tiles no caminho
                 board.SetEditorPreviewTile(pos, st);
             }
             else if(cTileObj && st.name == "cenario0" && cTileObj.name.Contains("path")){
                 // eraser
+                board.SetEditorPreviewTile(pos, st);
+            } 
+            else if (cTileObj && !st.name.Contains("path") && !cTileObj.name.Contains("path"))
+            {
                 board.SetEditorPreviewTile(pos, st);
             }
             currentTile = pos;
@@ -96,13 +100,13 @@ public class BoardController : MonoBehaviour
     }
 
     // Change the selected Tile to add
-    public void PathSelection(string name){
+    public void PathSelection(string tileName){
         if (tilePath.Count == 0)
         {
             firstTile = true;
         }
         
-        if (name == "path0" && tilePath.Count > 0 && !(st && st.name == "path0"))
+        if (tileName == "path0" && tilePath.Count > 0 && !(st && st.name == "path0"))
         {
             if (tilePath.Count > 1)
             {
@@ -115,17 +119,12 @@ public class BoardController : MonoBehaviour
             LockTiles(tilePath[tilePath.Count - 1]);
         }
 
-        st = tilesTypes[name];
+        st = tilesTypes[tileName];
     }
 
-    public void ScenarioSelection(string name)
+    public void ScenarioSelection(string tileName)
     {
-        foreach (var key in tilesTypes.Keys)
-        {
-            print(key);
-        }
-        
-        st = tilesTypes[name];
+        st = tilesTypes[tileName];
         board.ClearAllEditorPreviewTiles();
     }
 
