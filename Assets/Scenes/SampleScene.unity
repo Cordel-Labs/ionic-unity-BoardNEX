@@ -1570,6 +1570,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6750412284301557512, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6750412284301557512, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6750412284301557512, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 175347965}
+    - target: {fileID: 6750412284301557512, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6750412284301557512, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RedoAction
+      objectReference: {fileID: 0}
+    - target: {fileID: 6750412284301557512, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BoardController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6750412284301557512, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6750412284313294881, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -1653,6 +1681,34 @@ PrefabInstance:
     - target: {fileID: 6750412285605538697, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: PathSelection
+      objectReference: {fileID: 0}
+    - target: {fileID: 6750412285658383252, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6750412285658383252, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6750412285658383252, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 175347965}
+    - target: {fileID: 6750412285658383252, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6750412285658383252, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UndoAction
+      objectReference: {fileID: 0}
+    - target: {fileID: 6750412285658383252, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BoardController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6750412285658383252, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6750412285961548312, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

@@ -11,6 +11,8 @@ public class BoardController : MonoBehaviour
     private Vector3Int pos, prevSet, currentTile = new Vector3Int(100, 100, 0);
     private Vector3 mousePos;
     private TileBase cTileObj, preview, st;
+    private List<Change> changes = new List<Change>();
+    private int cInd = 0;
     // private int st = 0;
     private bool firstTile = true;
     
@@ -59,6 +61,11 @@ public class BoardController : MonoBehaviour
         }
         
         if(Input.GetMouseButtonDown(0) && board.HasEditorPreviewTile(pos) && board.GetEditorPreviewTile(pos).name == st.name){
+            if(cInd > 0){
+                changes.RemoveRange(changes.Count - cInd, cInd);
+                cInd = 0;
+            }
+            changes.Add(new Change(pos, board.GetTile(pos).name, st.name));
             board.SetTile(pos, st);
             board.SetEditorPreviewTile(pos, null);
             if(st.name == "path0"){
@@ -71,6 +78,42 @@ public class BoardController : MonoBehaviour
         }
     }
 
+    public void UndoAction(){
+        if(cInd < changes.Count){
+            cInd++;
+            Change undo = changes[changes.Count - cInd];
+            board.SetTile(undo.cPos, tilesTypes[undo.prevTile]);
+            if(undo.newTile == "path0"){
+                tilePath.RemoveAt(tilePath.Count - 1);
+            }
+            if(st.name == "path0"){
+                board.ClearAllEditorPreviewTiles();
+                firstTile = true;
+                if(tilePath.Count > 1){
+                    for (int i = 0; i < tilePath.Count - 1; i++){
+                        LockTiles(tilePath[i], 7);
+                    }
+                }
+                if(tilePath.Count > 0)
+                    LockTiles(tilePath[tilePath.Count - 1]);
+            }
+        }
+    }
+
+    public void RedoAction(){
+        if(cInd > 0){
+            cInd--;
+            Change redo = changes[changes.Count - 1 - cInd];
+            board.SetTile(redo.cPos, tilesTypes[redo.newTile]);
+            if(redo.newTile == "path0"){
+                tilePath.Add(redo.cPos);
+            }
+            if(st.name == "path0"){
+                board.SetEditorPreviewTile(redo.cPos, null);
+                LockTiles(redo.cPos);
+            }
+        }
+    }
 
     private void LockTiles(Vector3Int center, int state = 8){
         if(!firstTile && state == 8){
@@ -158,5 +201,16 @@ public class BoardController : MonoBehaviour
                 j = 0;
             }
         }
+    }
+}
+
+public struct Change{
+    public Vector3Int cPos;
+    public string prevTile, newTile;
+
+    public Change(Vector3Int pos, string pt, string nt){
+        cPos = pos;
+        prevTile = pt;
+        newTile = nt;
     }
 }
