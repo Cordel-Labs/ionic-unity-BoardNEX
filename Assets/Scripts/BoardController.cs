@@ -202,13 +202,23 @@ public class BoardController : MonoBehaviour
             }
         }
     }
+    
+    public void OpenPopup(GameObject popup) {
+        popup.SetActive(true);
+    }
+    
+    public void ClosePopup(GameObject popup) {
+        popup.SetActive(false);
+    }
 }
 
-public struct Change{
+public struct Change
+{
     public Vector3Int cPos;
     public string prevTile, newTile;
 
-    public Change(Vector3Int pos, string pt, string nt){
+    public Change(Vector3Int pos, string pt, string nt)
+    {
         cPos = pos;
         prevTile = pt;
         newTile = nt;
