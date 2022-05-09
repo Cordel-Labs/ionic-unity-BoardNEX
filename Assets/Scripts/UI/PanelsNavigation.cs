@@ -1,28 +1,30 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PanelsNavigation : MonoBehaviour
 {
     private int currentPanel = 0;
     [SerializeField] GameObject[] panels;
+    [SerializeField] private Image[] buttons;
+    [SerializeField] private Color selectedColor;
     [SerializeField] private Animator containerAnimator;
     private bool active = true;
 
-    public void confirm()
+    private void Start()
     {
-        panels[currentPanel].GetComponent<Animator>().SetBool("active", false);
-        var hasNext = currentPanel == panels.Length - 1;
-        currentPanel = hasNext ? 0 : currentPanel + 1;
-        panels[currentPanel].GetComponent<Animator>().SetBool("active", true);
+        selectedColor.a = 1;
+        buttons[currentPanel].color = selectedColor;
     }
-    
-    public void delete()
-    {
-        if (currentPanel < 1) return;
 
+    public void ChangePanel(int index)
+    {
+        buttons[currentPanel].color = Color.white;
         panels[currentPanel].GetComponent<Animator>().SetBool("active", false);
-        currentPanel--;
+        currentPanel = index;
+        buttons[currentPanel].color = selectedColor;
         panels[currentPanel].GetComponent<Animator>().SetBool("active", true);
     }
 
