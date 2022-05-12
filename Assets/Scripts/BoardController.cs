@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 
 public class BoardController : MonoBehaviour
 {
     [SerializeField] private Tilemap board;
     [SerializeField] private TileBase[] scTiles, pathTiles;
+    [SerializeField] private Text errorText;
     private List<Vector3Int> tilePath = new List<Vector3Int>();
     private Vector3Int pos, prevSet, currentTile = new Vector3Int(100, 100, 0);
     private Vector3 mousePos;
@@ -210,36 +212,64 @@ public class BoardController : MonoBehaviour
         board.ClearAllEditorPreviewTiles();
     }
 
-    public void GenerateScenario() => StartCoroutine("GenerateBoard");
+    // public void GenerateScenario() => StartCoroutine("GenerateBoard");
 
     public void ClearPreviewTiles() {
         st = null;
         board.ClearAllEditorPreviewTiles();
     }    
 
-    public IEnumerator GenerateBoard(){
-        yield return new WaitForSeconds(.3f);
-        int xMod = 4, yMod = 3, y, j, count;
+    public void GenerateBoard(string[] brd){
+        int z = 0, xMod = 4, yMod = 3, y, j, count;
         for(int i = 0; i < 10; i++){
-            xMod -= (i % 2);
-            yMod += 1 - (i % 2);
-            j = 1 - (i % 2);
-            y = xMod - yMod;
-            count = 0;
+            xMod -= (i % 2); yMod += 1 - (i % 2);
+            j = 1 - (i % 2); y = xMod - yMod; count = 0;
             for(int x = xMod; x >= (xMod - 5 + (i % 2)); x--){
                 for(; j < 2; j++){
-                    if(++count > 10)
-                        break;
+                    if(++count > 10) break;
                     var nextTile = board.GetTile(new Vector3Int(x, y, 0));
-                    if(nextTile && nextTile.name != "path0"){
-                        yield return new WaitForSeconds(.005f);
-                        board.SetTile(new Vector3Int(x, y, 0), scTiles[Random.Range(2, scTiles.Length-1)]);
-                    }
+                    if(nextTile) board.SetTile(new Vector3Int(x, y, 0), tilesTypes[brd[z++]]);
                     y++;
                 }
                 j = 0;
             }
         }
+    }
+
+    public string GetBoardAsList(){
+        string[] boardList = new string[100];
+        int z = 0, xMod = 4, yMod = 3, y, j, count;;
+        for(int i = 0; i < 10; i++){
+            xMod -= (i % 2); yMod += 1 - (i % 2);
+            j = 1 - (i % 2); y = xMod - yMod; count = 0;
+            for(int x = xMod; x >= (xMod - 5 + (i % 2)); x--){
+                for(; j < 2; j++){
+                    if(++count > 10) break;
+                    var nextTile = board.GetTile(new Vector3Int(x, y, 0));
+                    if(nextTile) boardList[z++] = nextTile.name;
+                    y++;
+                }
+                j = 0;
+            }
+        }
+        return string.Join(";", boardList);
+    }
+
+    public void SaveBoard(){
+        FirebaseManager.Instance.PostData("boardPath", GetBoardAsList(), gameObject.name);
+    }
+
+    public void GetBoard(){
+        FirebaseManager.Instance.GetData("boardPath", gameObject.name);
+    }
+
+    private void CallbackFunc(string message){
+        if(message == "Success") return;
+        else GenerateBoard(message.Split(';'));
+    }
+
+    private void FallbackFunc(string err){
+        errorText.text = err;
     }
     
     public void OpenPopup(GameObject popup) {

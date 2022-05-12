@@ -121,16 +121,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6013861847750502867, guid: e6565a44bf8664a46b99a021e55eebf5, type: 3}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 3
+        m_MethodName: PathSelection
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: path2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &443629755116167789
@@ -447,7 +447,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6013861847750502866, guid: e6565a44bf8664a46b99a021e55eebf5, type: 3}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
         m_MethodName: PathSelection
         m_Mode: 5
@@ -580,16 +580,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6013861847750502867, guid: e6565a44bf8664a46b99a021e55eebf5, type: 3}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 3
+        m_MethodName: PathSelection
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: path3
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1406917775737058820
@@ -854,7 +854,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -29.8817}
+  m_AnchoredPosition: {x: 0, y: -0.0000030093918}
   m_SizeDelta: {x: 79.957, y: 301.9632}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3073884389890222649
@@ -1473,16 +1473,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6013861847750502867, guid: e6565a44bf8664a46b99a021e55eebf5, type: 3}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 3
+        m_MethodName: PathSelection
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: path4
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &4716149218838761755
@@ -1951,7 +1951,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6750412284102301429}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+        m_MethodName: Zoom
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: in
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6750412284106888049
 GameObject:
   m_ObjectHideFlags: 0
@@ -2303,7 +2315,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6750412284301557513}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
+        m_MethodName: RedoAction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6750412284357549289
 GameObject:
   m_ObjectHideFlags: 0
@@ -2785,7 +2809,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6013861847750502866, guid: e6565a44bf8664a46b99a021e55eebf5, type: 3}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
         m_MethodName: ScenarioSelection
         m_Mode: 5
@@ -3125,7 +3149,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6750412284861261631}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+        m_MethodName: Zoom
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: out
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6750412284907086457
 GameObject:
   m_ObjectHideFlags: 0
@@ -3889,7 +3925,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6013861847750502866, guid: e6565a44bf8664a46b99a021e55eebf5, type: 3}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
         m_MethodName: PathSelection
         m_Mode: 5
@@ -4094,16 +4130,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6013861847750502867, guid: e6565a44bf8664a46b99a021e55eebf5, type: 3}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 3
+        m_MethodName: ScenarioSelection
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: cenario3
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &6750412285585458377
@@ -4528,7 +4564,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6750412285658383253}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
+        m_MethodName: UndoAction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6750412285748661934
 GameObject:
   m_ObjectHideFlags: 0
@@ -4794,16 +4842,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6013861847750502867, guid: e6565a44bf8664a46b99a021e55eebf5, type: 3}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 3
+        m_MethodName: ScenarioSelection
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: cenario4
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &6750412285930524592
@@ -5265,16 +5313,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6013861847750502867, guid: e6565a44bf8664a46b99a021e55eebf5, type: 3}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 3
+        m_MethodName: ScenarioSelection
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: cenario1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &6750412286029695101
@@ -5685,7 +5733,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3065001875759401956}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
+        m_MethodName: PathSelection
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: path6
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &9005188353760707545
 GameObject:
   m_ObjectHideFlags: 0
