@@ -24,10 +24,10 @@ mergeInto(LibraryManager.library, {
 
         try{
             firebase.database().ref(parsedPath).set(JSON.parse(parsedValue)).then(function(unused) {
-                window.unityInstance.SendMessage(parsedObjectName, parsedCallback, "Success");
+                window.unityInstance.SendMessage(parsedName, parsedCallback, "Success");
             });
         } catch (err){
-            window.unityInstance.SendMessage(parsedObjectName, parsedFallback, JSON.stringify(err, Object.getOwnPropertyNames(err)));
+            window.unityInstance.SendMessage(parsedName, parsedFallback, JSON.stringify(err, Object.getOwnPropertyNames(err)));
         }
     }
 });

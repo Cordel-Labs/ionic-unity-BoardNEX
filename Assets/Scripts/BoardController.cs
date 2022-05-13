@@ -20,18 +20,14 @@ public class BoardController : MonoBehaviour
     
     private readonly Dictionary<string, TileBase> tilesTypes = new Dictionary<string, TileBase>();
 
-    void Start()
-    {
-        // StartCoroutine("GenerateBoard");
+    void Start(){
         st = pathTiles[0];
 
-        foreach (var pathTile in pathTiles)
-        {
+        foreach (var pathTile in pathTiles){
             tilesTypes.Add(pathTile.name, pathTile);
         }
 
-        foreach (var tile in scTiles)
-        {
+        foreach (var tile in scTiles){
             tilesTypes.Add(tile.name, tile);
         }
     }
@@ -41,35 +37,33 @@ public class BoardController : MonoBehaviour
         pos = board.WorldToCell(mousePos) + new Vector3Int(0, 0, 10);
         
         if(pos != currentTile && st){
-            board.SetEditorPreviewTile(currentTile, (preview) ? preview : null);
-            preview = board.GetEditorPreviewTile(pos);
+            board.SetTile(currentTile, (preview) ? preview : null);
+            preview = board.GetTile(pos);
             if((cTileObj = board.GetTile(pos)) && st.name == "path0" && (firstTile || (preview && preview.name == "pclearPath"))){
                 // tile de caminho
-                board.SetEditorPreviewTile(pos, st);
+                board.SetTile(pos, st);
             }
             else if(cTileObj && cTileObj.name == "path0" && st.name != "path0" && !st.name.Contains("cenario")){
                 // tiles no caminho
-                board.SetEditorPreviewTile(pos, st);
+                board.SetTile(pos, st);
             }
             else if(cTileObj && st.name == "cenario0" && cTileObj.name.Contains("path")){
                 // eraser
-                board.SetEditorPreviewTile(pos, st);
+                board.SetTile(pos, st);
             } 
-            else if (cTileObj && !st.name.Contains("path") && !cTileObj.name.Contains("path"))
-            {
-                board.SetEditorPreviewTile(pos, st);
+            else if (cTileObj && !st.name.Contains("path") && !cTileObj.name.Contains("path")){
+                // tiles de cenario
+                board.SetTile(pos, st);
             }
             currentTile = pos;
         }
         
-        if(Input.GetMouseButtonDown(0) && board.HasEditorPreviewTile(pos) && board.GetEditorPreviewTile(pos).name == st.name){
+        if(Input.GetMouseButtonDown(0) && board.HasTile(pos) && board.GetTile(pos).name == st.name){
             if(cInd > 0){
                 changes.RemoveRange(changes.Count - cInd, cInd);
                 cInd = 0;
             }
-            changes.Add(new Change(new Vector3Int[1]{pos}, board.GetTile(pos).name, st.name));
-            board.SetTile(pos, st);
-            board.SetEditorPreviewTile(pos, null);
+            changes.Add(new Change(new Vector3Int[1]{pos}, preview.name, st.name));
             if(st.name == "path0"){
                 tilePath.Add(pos);
                 LockTiles(pos);
@@ -77,6 +71,7 @@ public class BoardController : MonoBehaviour
             else if(st.name == "cenario0"){
                 EraseTile(tilePath.IndexOf(pos));
             }
+            preview = st;
         }
     }
 
@@ -98,7 +93,7 @@ public class BoardController : MonoBehaviour
             }
             if(st.name == "path0"){
                 // Update Editor Preview Tiles with the change
-                board.ClearAllEditorPreviewTiles();
+                ClearPathPreview();
                 firstTile = true;
                 if(tilePath.Count > 1){
                     for (int i = 0; i < tilePath.Count - 1; i++){
@@ -131,7 +126,7 @@ public class BoardController : MonoBehaviour
                 // Update Editor Preview Tiles with the change
                 if(redo.newTile == "cenario0"){
                     // If redoing Eraser
-                    board.ClearAllEditorPreviewTiles();
+                    ClearPathPreview();
                     firstTile = true;
                     if(tilePath.Count > 1){
                         for (int i = 0; i < tilePath.Count - 1; i++){
@@ -143,7 +138,7 @@ public class BoardController : MonoBehaviour
                 }
                 else if(redo.newTile == "path0"){
                     // If redoing a path0 tile
-                    board.SetEditorPreviewTile(redo.cPos[0], null);
+                    // board.SetEditorPreviewTile(redo.cPos[0], null);
                     LockTiles(redo.cPos[0]);
                 }
             }
@@ -158,9 +153,9 @@ public class BoardController : MonoBehaviour
             Vector3 rot = Quaternion.Euler(0, 0, 60 * i) * new Vector3(0, .5f, 0);
             var target = board.WorldToCell(board.CellToLocal(center) + rot);
             TileBase targetTile = board.GetTile(target);
-            preview = board.GetEditorPreviewTile(target);
+            preview = board.GetTile(target);
             if(targetTile && targetTile.name != "path0" && !(preview && preview.name == "pblockPath")){
-                board.SetEditorPreviewTile(target, pathTiles[state]);
+                board.SetTile(target, pathTiles[state]);
             }
         }
         preview = null;
@@ -175,7 +170,7 @@ public class BoardController : MonoBehaviour
         for(int i = tilePath.Count - 1; i > ind; i--){
             posArray[--j] = tilePath[i];
             board.SetTile(tilePath[i], st);
-            board.SetEditorPreviewTile(tilePath[i], null);
+            // board.SetEditorPreviewTile(tilePath[i], null);
             tilePath.RemoveAt(i);
         }
         posArray[--j] = tilePath[ind];
@@ -189,7 +184,7 @@ public class BoardController : MonoBehaviour
     }
 
     // Change the selected Tile to add
-    public void PathSelection(string tileName){        
+    public void PathSelection(string tileName){
         if (tileName == "path0" && tilePath.Count > 0 && !(st && st.name == "path0"))
         {
             if (tilePath.Count > 1)
@@ -206,17 +201,14 @@ public class BoardController : MonoBehaviour
         st = tilesTypes[tileName];
     }
 
-    public void ScenarioSelection(string tileName)
-    {
+    public void ScenarioSelection(string tileName){
         st = tilesTypes[tileName];
-        board.ClearAllEditorPreviewTiles();
+        ClearPathPreview();
     }
-
-    // public void GenerateScenario() => StartCoroutine("GenerateBoard");
 
     public void ClearPreviewTiles() {
         st = null;
-        board.ClearAllEditorPreviewTiles();
+        ClearPathPreview();
     }    
 
     public void GenerateBoard(string[] brd){
@@ -255,6 +247,23 @@ public class BoardController : MonoBehaviour
         return string.Join(";", boardList);
     }
 
+    public void ClearPathPreview(){
+        int xMod = 4, yMod = 3, y, j, count;
+        for(int i = 0; i < 10; i++){
+            xMod -= (i % 2); yMod += 1 - (i % 2);
+            j = 1 - (i % 2); y = xMod - yMod; count = 0;
+            for(int x = xMod; x >= (xMod - 5 + (i % 2)); x--){
+                for(; j < 2; j++){
+                    if(++count > 10) break;
+                    var nextTile = board.GetTile(new Vector3Int(x, y, 0));
+                    if(nextTile && (nextTile.name == "pblockPath" || nextTile.name == "pclearPath")) board.SetTile(new Vector3Int(x, y, 0), tilesTypes["cenario0"]);
+                    y++;
+                }
+                j = 0;
+            }
+        }
+    }
+
     public void SaveBoard(){
         FirebaseManager.Instance.PostData("boardPath", GetBoardAsList(), gameObject.name);
     }
@@ -265,7 +274,10 @@ public class BoardController : MonoBehaviour
 
     private void CallbackFunc(string message){
         if(message == "Success") return;
-        else GenerateBoard(message.Split(';'));
+        else {
+            Debug.Log(message);
+            GenerateBoard(message.Replace("\"", "").Replace("{", "").Replace("}", "").Split(';'));
+        }
     }
 
     private void FallbackFunc(string err){

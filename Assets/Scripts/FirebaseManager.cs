@@ -22,7 +22,8 @@ public class FirebaseManager : MonoBehaviour{
     public static extern void PostJSON(string path, string value, string name, string callback, string fallback);
 
     public void PostData(string path, string data, string name){
-        PostJSON("path", data, gameObject.name, "CallbackFunc", "FallbackFunc");
+        string realData = "\"" + data + "\"";
+        PostJSON(path, realData, name, "CallbackFunc", "FallbackFunc");
     }
 
     public void GetData(string path, string name){
