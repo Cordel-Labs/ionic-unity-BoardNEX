@@ -30,6 +30,9 @@ public class BoardController : MonoBehaviour
         foreach (var tile in scTiles){
             tilesTypes.Add(tile.name, tile);
         }
+
+        // string boardString = "9;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;path0_0;cenario0;path0_3;path0_4;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;path0_1;path0_2;cenario0;path0_5;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;path0_6;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;path0_8;path0_7;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0";
+        // GenerateBoard(boardString.Split(';'));
     }
 
     void Update(){
@@ -212,7 +215,8 @@ public class BoardController : MonoBehaviour
     }    
 
     public void GenerateBoard(string[] brd){
-        int z = 0, xMod = 4, yMod = 3, y, j, count;
+        tilePath = new List<Vector3Int>(new Vector3Int[int.Parse(brd[0])]);
+        int z = 1, xMod = 4, yMod = 3, y, j, count;
         for(int i = 0; i < 10; i++){
             xMod -= (i % 2); yMod += 1 - (i % 2);
             j = 1 - (i % 2); y = xMod - yMod; count = 0;
@@ -220,17 +224,35 @@ public class BoardController : MonoBehaviour
                 for(; j < 2; j++){
                     if(++count > 10) break;
                     var nextTile = board.GetTile(new Vector3Int(x, y, 0));
-                    if(nextTile) board.SetTile(new Vector3Int(x, y, 0), tilesTypes[brd[z++]]);
+                    if(nextTile) {
+                        if(brd[z].Contains("path0")){
+                            string[] nameNind = brd[z++].Split('_');
+                            tilePath[int.Parse(nameNind[1])] = new Vector3Int(x, y, 0);
+                            board.SetTile(new Vector3Int(x, y, 0), tilesTypes[nameNind[0]]);
+                        }
+                        else board.SetTile(new Vector3Int(x, y, 0), tilesTypes[brd[z++]]);
+                    }
                     y++;
                 }
                 j = 0;
             }
         }
+        if (tilePath.Count > 0 && st && st.name == "path0"){
+            firstTile = false;
+            if (tilePath.Count > 1){
+                for (int i = 0; i < tilePath.Count - 1; i++){
+                    LockTiles(tilePath[i], 7);
+                }
+            }
+            firstTile = true;
+            LockTiles(tilePath[tilePath.Count - 1]);
+        }
     }
 
     public string GetBoardAsList(){
-        string[] boardList = new string[100];
-        int z = 0, xMod = 4, yMod = 3, y, j, count;;
+        string[] boardList = new string[101];
+        boardList[0] = tilePath.Count.ToString();
+        int z = 1, xMod = 4, yMod = 3, y, j, count;;
         for(int i = 0; i < 10; i++){
             xMod -= (i % 2); yMod += 1 - (i % 2);
             j = 1 - (i % 2); y = xMod - yMod; count = 0;
@@ -238,7 +260,10 @@ public class BoardController : MonoBehaviour
                 for(; j < 2; j++){
                     if(++count > 10) break;
                     var nextTile = board.GetTile(new Vector3Int(x, y, 0));
-                    if(nextTile) boardList[z++] = nextTile.name;
+                    if(nextTile){
+                        boardList[z++] = (nextTile.name.Contains("Path")) ? "cenario0" : nextTile.name;
+                        if(nextTile.name == "path0") boardList[z-1] += "_" + tilePath.IndexOf(new Vector3Int(x, y, 0)).ToString();
+                    } 
                     y++;
                 }
                 j = 0;
