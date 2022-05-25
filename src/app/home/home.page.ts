@@ -4,6 +4,7 @@ import { ColectionEditPage } from '../colection-edit/colection-edit.page';
 import { FirebaseApp } from '@angular/fire';
 import { Colection, Question } from '../class/colection';
 import { Router } from '@angular/router';
+import { UnityComponentComponent } from '../unity-component/unity-component.component';
 
 @Component({
   selector: 'app-home',
@@ -34,8 +35,9 @@ export class HomePage {
 
   ngOnInit() {
     // this.fbApp.database().ref('nome').once('value').then((snapshot) => {
-    //   console.log(snapshot.val());
+    //   this.colecList.push(snapshot.val() as Colection);
     // });
+    // window.alert('aaa');
   }
 
   async editCollection(ind = -1){
