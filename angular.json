@@ -32,7 +32,7 @@
               }
             ],
             "styles": ["src/theme/variables.scss", "src/global.scss"],
-            "scripts": ["src/assets/js/buildteste.loader.js"],
+            "scripts": ["src/assets/js/noCompressionBuild.loader.js"],
             "aot": false,
             "vendorChunk": true,
             "extractLicenses": false,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FirebaseApp } from '@angular/fire';
 
 declare function createUnityInstance(e,r,t): any;
 
@@ -9,11 +10,7 @@ declare function createUnityInstance(e,r,t): any;
 })
 export class UnityComponentComponent implements OnInit {
 
-  
-
-  constructor() { 
-    
-  }
+  constructor(private fbApp: FirebaseApp,) { }
 
   ngOnInit() {
     let container = document.getElementById("unity-container");
@@ -41,11 +38,11 @@ export class UnityComponentComponent implements OnInit {
       updateBannerVisibility();
     }
 
-    var loaderUrl = '../../assets/js/buildteste.loader.js';
+    var loaderUrl = '../../assets/js/noCompressionBuild.loader.js';
     var config = {
-      dataUrl: '../../assets/js/buildteste.data.br',
-      frameworkUrl: '../../assets/js/buildteste.framework.js.br',
-      codeUrl: '../../assets/js/buildteste.wasm.br',
+      dataUrl: '../../assets/js/noCompressionBuild.data',
+      frameworkUrl: '../../assets/js/noCompressionBuild.framework.js',
+      codeUrl: '../../assets/js/noCompressionBuild.wasm',
       streamingAssetsUrl: "StreamingAssets",
       companyName: "DefaultCompany",
       productName: "NexusBoard",
@@ -80,6 +77,7 @@ export class UnityComponentComponent implements OnInit {
         progressBarFull.style.width = 100 * progress + "%";
       }).then((unityInstance) => {
         window.unityInstance = unityInstance;
+        unityInstance.SendMessage('BoardManager', 'FallbackFunc', 'teste de comunicação');
         loadingBar.style.display = "none";
         fullscreenButton.onclick = () => {
           unityInstance.SetFullscreen(1);
@@ -89,6 +87,15 @@ export class UnityComponentComponent implements OnInit {
       });
     };
     document.body.appendChild(script);
+
+
+    // firebase setup
+    // var fbScript = document.createElement("script");
+    // var dbScript = document.createElement("script");
+    // fbScript.src = "https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js";
+    // dbScript.src = "https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js";
+    // document.body.appendChild(fbScript);
+    // document.body.appendChild(dbScript);
   }
 
 }
