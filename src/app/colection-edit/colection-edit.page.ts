@@ -4,8 +4,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FirebaseApp } from '@angular/fire';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Colection, Question } from '../class/colection';
-// import { AngularFireStorage } from '@angular/fire/compat/storage';
-// import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-colection-edit',

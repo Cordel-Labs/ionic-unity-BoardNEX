@@ -9,7 +9,9 @@ export class TestPage implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
+  sendMessageToUnity(){
+    window.unityInstance.SendMessage("BoardManager", "GetBoard");
+  }
 }

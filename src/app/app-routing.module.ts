@@ -8,13 +8,14 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
     path: 'colection-edit',
     loadChildren: () => import('./colection-edit/colection-edit.module').then( m => m.ColectionEditPageModule)
-  },  {
+  },
+  {
     path: 'tabuleiros',
     loadChildren: () => import('./tabuleiros/tabuleiros.module').then( m => m.TabuleirosPageModule)
   },
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path: 'test',
     loadChildren: () => import('./test/test.module').then( m => m.TestPageModule)
+  },
+  {
+    path: 'board-edit',
+    loadChildren: () => import('./board-edit/board-edit.module').then( m => m.BoardEditPageModule)
   },
 
 ];

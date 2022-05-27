@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
-import { ColectionEditPage } from '../colection-edit/colection-edit.page';
+import { BoardEditPage } from '../board-edit/board-edit.page';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { FirebaseApp } from '@angular/fire';
-import { Colection } from '../class/colection';
+import { Board } from '../class/board';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,14 +12,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./tabuleiros.page.scss'],
 })
 export class TabuleirosPage implements OnInit {
-  colectionEdit = ColectionEditPage;
-  boards: Colection[] = [/*'','','',''*/]; // change to boards
-  favouriteList: Colection[] = [];
+  boardEdit = BoardEditPage;
+  boards: Board[] = [];
+  favouriteList: Board[] = [];
   favouritedCount = 0;
   searchText = '';
   favText = 'Favoritar';
+  userId: string;
+  count: number;
 
-  backupList: Colection[] = [];
+  backupList: Board[] = [];
   backupFC = 0;
   searching = false;
 
@@ -29,13 +32,31 @@ export class TabuleirosPage implements OnInit {
     private modalController: ModalController,
     public alertController: AlertController,
     private fbApp: FirebaseApp,
+    private auth: AngularFireAuth,
     public router: Router
     ) {}
 
   ngOnInit() {
-    // this.fbApp.database().ref('nome').once('value').then((snapshot) => {
-    //   console.log(snapshot.val());
-    // });
+    this.auth.currentUser.then(res => {
+      if(res !== null){
+        this.userId = res.uid;
+        this.retrieveBoards()
+      }
+      else
+        this.router.navigate(['/login'], {replaceUrl: true});
+    });
+  }
+
+  retrieveBoards(){
+    this.fbApp.database().ref(this.userId + '/boards').once('value').then((snapshot) => {
+      snapshot.forEach(e => {
+        this.boards.push(e.val());
+        if(e.val().favourited){
+          this.favouriteCol(this.count);
+        }
+        this.count++
+      });
+    });
   }
 
   async editCollection(ind = -1){
@@ -43,10 +64,10 @@ export class TabuleirosPage implements OnInit {
     if(ind >= 0)
       colec = this.boards[ind];
     const modal = await this.modalController.create({
-      component: this.colectionEdit,
+      component: this.boardEdit,
       cssClass: 'colectionEditPageClass',
       componentProps: {
-        newColection: colec,
+        newBoard: colec,
         colecInd: ind
       }
     });
@@ -57,6 +78,7 @@ export class TabuleirosPage implements OnInit {
           this.boards[res.data.data.ind] = res.data.data.obj;
         else
           this.boards.push(res.data.data.obj);
+        this.fbApp.database().ref(this.userId + '/boards/' + res.data.data.obj.fbKey).set(res.data.data.obj);
       }
     });
 
@@ -80,6 +102,7 @@ export class TabuleirosPage implements OnInit {
           this.backupFC--;
         else
           this.favouritedCount--;
+      this.fbApp.database().ref(this.userId + '/boards/' + this.boards[ind].fbKey).remove();
       this.boards.splice(ind, 1);
     }
   }
@@ -91,7 +114,8 @@ export class TabuleirosPage implements OnInit {
   }
 
   duplicateCol(ind){
-    const clone = new Colection(this.boards[ind], this.boards[ind].createdDate, this.boards[ind].questoes)
+    const clone = new Board(this.boards[ind], this.boards[ind].createdDate, '');
+    this.fbApp.database().ref(this.userId + '/boards/' + clone.fbKey).push(clone);
     this.boards.splice(ind, 0, clone);
   }
 
@@ -112,6 +136,7 @@ export class TabuleirosPage implements OnInit {
       else
         this.favouritedCount++;
     }
+    this.fbApp.database().ref(this.userId + '/boards/' + this.boards[ind].fbKey + '/favourited').push(this.boards[ind].favourited);
   }
 
   focusSearch(){

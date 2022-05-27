@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { TestPageRoutingModule } from './test-routing.module';
 
 import { TestPage } from './test.page';
-import { UnityComponentComponent } from '../unity-component/unity-component.component';
+// import { UnityComponentComponent } from '../unity-component/unity-component.component';
 
 @NgModule({
   imports: [
@@ -16,6 +16,6 @@ import { UnityComponentComponent } from '../unity-component/unity-component.comp
     IonicModule,
     TestPageRoutingModule
   ],
-  declarations: [TestPage, UnityComponentComponent]
+  declarations: [TestPage]
 })
 export class TestPageModule {}

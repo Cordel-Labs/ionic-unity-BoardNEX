@@ -5,21 +5,24 @@
 <ion-content>
     <img src="../../assets/Logo2.png">
     <div>
-        <div>
-            <h1>Login</h1>
-            <ion-input placeholder="Input text"></ion-input>
-            <ion-input placeholder="Senha"></ion-input>
-            <ion-button>Entrar</ion-button>
+        <form [formGroup]="forms">
+            <h1 id="titleText">Login</h1>
+            <ion-input formControlName="email" placeholder="Input text"></ion-input>
+            <ion-input *ngIf="mode == 'register'" formControlName="confirmEmail" placeholder="Input text"></ion-input>
+            <ion-input formControlName="senha" placeholder="Senha" type="password"></ion-input>
+            <ion-input *ngIf="mode == 'register'" formControlName="confirmSenha" placeholder="Senha" type="password"></ion-input>
+            <ion-button [disabled]="!forms.valid" (click)="authenticate()">Entrar</ion-button>
             <div>
                 <ion-toggle></ion-toggle>
-                <p>Manter-me conectado</p>
+                <p id="toggleText">Manter-me conectado</p>
             </div>
-            <div>
+            <div class="linesDiv">
                 <div class="line"></div>
                 <p>Ou</p>
                 <div class="line"></div>
             </div>
-            <ion-button style="margin-top: 16px;">Login com Google</ion-button>
-        </div>
+            <ion-button disabled="true" style="margin-top: 16px;">Login com Google</ion-button>
+        </form>
+        <p>Não possui uma conta? <a (click)="changeScreen()">Crie agora</a></p>
     </div>
 </ion-content>

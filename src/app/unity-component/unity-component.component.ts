@@ -10,6 +10,8 @@ declare function createUnityInstance(e,r,t): any;
 })
 export class UnityComponentComponent implements OnInit {
 
+  unityInstance: any;
+
   constructor(private fbApp: FirebaseApp,) { }
 
   ngOnInit() {
@@ -51,22 +53,13 @@ export class UnityComponentComponent implements OnInit {
       devicePixelRatio: 1
     };
 
-    // By default Unity keeps WebGL canvas render target size matched with
-    // the DOM size of the canvas element (scaled by window.devicePixelRatio)
-    // Set this to false if you want to decouple this synchronization from
-    // happening inside the engine, and you would instead like to size up
-    // the canvas DOM size and WebGL render target sizes yourself.
-    // config.matchWebGLToCanvasSize = false;
-
     if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
       container.className = "unity-mobile";
-      // Avoid draining fillrate performance on mobile devices,
-      // and default/override low DPI mode on mobile browsers.
       config.devicePixelRatio = 1;
       unityShowBanner('WebGL builds are not supported on mobile devices.', '');
     } else {
-      canvas.style.width = "960px";
-      canvas.style.height = "600px";
+      canvas.style.width = "70vw";
+      canvas.style.height = "80vh";
     }
     loadingBar.style.display = "block";
 
@@ -77,7 +70,6 @@ export class UnityComponentComponent implements OnInit {
         progressBarFull.style.width = 100 * progress + "%";
       }).then((unityInstance) => {
         window.unityInstance = unityInstance;
-        unityInstance.SendMessage('BoardManager', 'FallbackFunc', 'teste de comunicação');
         loadingBar.style.display = "none";
         fullscreenButton.onclick = () => {
           unityInstance.SetFullscreen(1);
@@ -88,14 +80,18 @@ export class UnityComponentComponent implements OnInit {
     };
     document.body.appendChild(script);
 
-
     // firebase setup
+    // var fbImport = document.createElement("script");
+    // fbImport.src = "https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js";
+    // document.body.appendChild(fbImport);
+    // var fbImport2 = document.createElement("script");
+    // fbImport2.src = "https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js";
+    // document.body.appendChild(fbImport2);
     // var fbScript = document.createElement("script");
-    // var dbScript = document.createElement("script");
-    // fbScript.src = "https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js";
-    // dbScript.src = "https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js";
+    // fbScript.src = '../../assets/js/firebaseScript.js';
     // document.body.appendChild(fbScript);
-    // document.body.appendChild(dbScript);
+
+    // window.unityInstance.SendMessage('BoardManager', 'FallbackFunc', 'teste de comunicação');
   }
 
 }

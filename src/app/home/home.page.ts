@@ -1,6 +1,7 @@
 import { Component, ViewChildren  } from '@angular/core';
 import { AlertController, ModalController, PopoverController } from '@ionic/angular';
 import { ColectionEditPage } from '../colection-edit/colection-edit.page';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { FirebaseApp } from '@angular/fire';
 import { Colection, Question } from '../class/colection';
 import { Router } from '@angular/router';
@@ -18,6 +19,8 @@ export class HomePage {
   favouritedCount = 0;
   searchText = '';
   favText = 'Favoritar';
+  userId: string;
+  count = 0;
 
   backupList: Colection[] = [];
   backupFC = 0;
@@ -30,14 +33,31 @@ export class HomePage {
     private modalController: ModalController,
     public alertController: AlertController,
     private fbApp: FirebaseApp,
+    private auth: AngularFireAuth,
     public router: Router
     ) {}
 
   ngOnInit() {
-    // this.fbApp.database().ref('nome').once('value').then((snapshot) => {
-    //   this.colecList.push(snapshot.val() as Colection);
-    // });
-    // window.alert('aaa');
+    this.auth.currentUser.then(res => {
+      if(res !== null){
+        this.userId = res.uid;
+        this.retrieveCollections();
+      }
+      else
+        this.router.navigate(['/login'], {replaceUrl: true});
+    });
+  }
+
+  retrieveCollections(){
+    this.fbApp.database().ref(this.userId + '/collections').once('value').then((snapshot) => {
+      snapshot.forEach(e => {
+        this.colecList.push(e.val());
+        if(e.val().favourited){
+          this.favouriteCol(this.count);
+        }
+        this.count++
+      });
+    });
   }
 
   async editCollection(ind = -1){
@@ -59,6 +79,7 @@ export class HomePage {
           this.colecList[res.data.data.ind] = res.data.data.obj;
         else
           this.colecList.push(res.data.data.obj);
+        this.fbApp.database().ref(this.userId + '/collections/' + res.data.data.obj.fbKey).set(res.data.data.obj);
       }
     });
 
@@ -93,12 +114,14 @@ export class HomePage {
           this.backupFC--;
         else
           this.favouritedCount--;
+      this.fbApp.database().ref(this.userId + '/collections/' + this.colecList[ind].fbKey).remove();
       this.colecList.splice(ind, 1);
     }
   }
 
   duplicateCol(ind){
-    const clone = new Colection(this.colecList[ind], this.colecList[ind].createdDate, this.colecList[ind].questoes)
+    const clone = new Colection(this.colecList[ind], this.colecList[ind].createdDate, this.colecList[ind].questoes);
+    this.fbApp.database().ref(this.userId + '/collections/' + clone.fbKey).push(clone);
     this.colecList.splice(ind, 0, clone);
   }
 
@@ -119,6 +142,7 @@ export class HomePage {
       else
         this.favouritedCount++;
     }
+    this.fbApp.database().ref(this.userId + '/collections/' + this.colecList[ind].fbKey + '/favourited').push(this.colecList[ind].favourited);
   }
 
   focusSearch(){
