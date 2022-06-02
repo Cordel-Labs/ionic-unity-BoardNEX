@@ -21,6 +21,9 @@ public class FirebaseManager : MonoBehaviour{
     [DllImport("__Internal")]
     public static extern void PostJSON(string path, string value, string name, string callback, string fallback);
 
+    [DllImport("__Internal")]
+    public static extern void WindowMessage(string message);
+
     public void PostData(string path, string data, string name){
         string realData = "\"" + data + "\"";
         PostJSON(path, realData, name, "CallbackFunc", "FallbackFunc");

@@ -31,6 +31,7 @@ public class BoardController : MonoBehaviour
             tilesTypes.Add(tile.name, tile);
         }
 
+        FirebaseManager.WindowMessage("started");
         // string boardString = "9;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;path0_0;cenario0;path0_3;path0_4;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;path0_1;path0_2;cenario0;path0_5;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;path0_6;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;path0_8;path0_7;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0";
         // GenerateBoard(boardString.Split(';'));
     }
@@ -290,14 +291,15 @@ public class BoardController : MonoBehaviour
     }
 
     public void SaveBoard(){
-        FirebaseManager.Instance.PostData("boardPath", GetBoardAsList(), gameObject.name);
+        // FirebaseManager.Instance.PostData("boardPath", GetBoardAsList(), gameObject.name);
+        FirebaseManager.WindowMessage("board" + GetBoardAsList());
     }
 
     public void GetBoard(){
         FirebaseManager.Instance.GetData("boardPath", gameObject.name);
     }
 
-    private void CallbackFunc(string message){
+    public void CallbackFunc(string message){
         if(message == "Success") return;
         else {
             Debug.Log(message);
@@ -305,8 +307,12 @@ public class BoardController : MonoBehaviour
         }
     }
 
-    private void FallbackFunc(string err){
+    public void FallbackFunc(string err){
         errorText.text = err;
+    }
+
+    public void AbortEditing(){
+        FirebaseManager.WindowMessage("leaveEditor");
     }
     
     public void OpenPopup(GameObject popup) {
