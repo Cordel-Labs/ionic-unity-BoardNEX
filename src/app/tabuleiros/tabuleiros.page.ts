@@ -141,9 +141,7 @@ export class TabuleirosPage implements OnInit {
 
   focusSearch(){
     if(this.searchText === '' && !this.searching){
-      console.log(this.boards);
       this.backupList = this.backupList.concat(this.boards);
-      console.log(this.backupList);
       this.backupFC = this.favouritedCount;
       this.favouritedCount = 0;
       this.searching = true;

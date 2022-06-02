@@ -54,13 +54,14 @@ export class BoardEditPage implements OnInit {
     }
 
     window.addEventListener('message', (e) => {
+      console.log(e);
       if(e.data == "started")
         this.unityStartUp();
       else if(e.data == "leaveEditor"){
         this.newBoard = null;
         this.dismiss();
       }
-      else if(e.data.includes('board')){
+      else if(e.data.ToString().includes('board')){
         this.finishForms(e.data.substring(5));
       }
     });

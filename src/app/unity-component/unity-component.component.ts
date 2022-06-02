@@ -79,19 +79,6 @@ export class UnityComponentComponent implements OnInit {
       });
     };
     document.body.appendChild(script);
-
-    // firebase setup
-    // var fbImport = document.createElement("script");
-    // fbImport.src = "https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js";
-    // document.body.appendChild(fbImport);
-    // var fbImport2 = document.createElement("script");
-    // fbImport2.src = "https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js";
-    // document.body.appendChild(fbImport2);
-    // var fbScript = document.createElement("script");
-    // fbScript.src = '../../assets/js/firebaseScript.js';
-    // document.body.appendChild(fbScript);
-
-    // window.unityInstance.SendMessage('BoardManager', 'FallbackFunc', 'teste de comunicação');
   }
 
 }

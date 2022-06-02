@@ -7,11 +7,48 @@
     <div>
         <form [formGroup]="forms">
             <h1 id="titleText">Login</h1>
+
             <ion-input formControlName="email" placeholder="Input text"></ion-input>
-            <ion-input *ngIf="mode == 'register'" formControlName="confirmEmail" placeholder="Input text"></ion-input>
+            <div *ngIf="forms.get('email').touched && !forms.get('email').valid" class="alert">
+                <p *ngIf="forms.get('email').errors?.['required']">
+                    Este campo é obrigatório. 
+                </p>
+                <p *ngIf="forms.get('email').errors?.['email']">
+                    Endereço de e-mail inválido.
+                </p>
+            </div>
+
+            <ion-input *ngIf="mode == 'register'" formControlName="confirmEmail" (ionChange)="confirmsChange()" placeholder="Input text"></ion-input>
+            <div *ngIf="mode == 'register' && forms.get('confirmEmail').touched" class="alert">
+                <p *ngIf="forms.get('confirmEmail').errors?.['required']">
+                    Este campo é obrigatório. 
+                </p>
+                <p *ngIf="forms.value.confirmEmail != forms.value.email">
+                    Os e-mails precisam ser iguais.
+                </p>
+            </div>
+
             <ion-input formControlName="senha" placeholder="Senha" type="password"></ion-input>
-            <ion-input *ngIf="mode == 'register'" formControlName="confirmSenha" placeholder="Senha" type="password"></ion-input>
-            <ion-button [disabled]="!forms.valid" (click)="authenticate()">Entrar</ion-button>
+            <div *ngIf="forms.get('senha').touched && !forms.get('senha').valid" class="alert">
+                <p *ngIf="forms.get('senha').errors?.['required']">
+                    Este campo é obrigatório. 
+                </p>
+                <p *ngIf="forms.get('senha').errors?.['minlength']">
+                    Precisa ter no mínimo 6 caracteres.
+                </p>
+            </div>
+
+            <ion-input *ngIf="mode == 'register'" formControlName="confirmSenha" (ionChange)="confirmsChange()" placeholder="Senha" type="password"></ion-input>
+            <div *ngIf="mode == 'register' && forms.get('confirmSenha').touched" class="alert">
+                <p *ngIf="forms.get('confirmSenha').errors?.['required']">
+                    Este campo é obrigatório. 
+                </p>
+                <p *ngIf="forms.value.confirmSenha != forms.value.senha">
+                    As senhas precisam ser iguais.
+                </p>
+            </div>
+
+            <ion-button [disabled]="!forms.valid || !equal" (click)="authenticate()">Entrar</ion-button>
             <div>
                 <ion-toggle></ion-toggle>
                 <p id="toggleText">Manter-me conectado</p>

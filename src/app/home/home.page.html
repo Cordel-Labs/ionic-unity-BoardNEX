@@ -5,14 +5,14 @@
 <ion-content [fullscreen]="true">
     <div id="menu">
         <img src="../../assets/Logo.png">
-        <ion-segment [value]="'home'">
-            <ion-segment-button value="home">
+        <div class="segment">
+            <ion-button class="segment-button checked">
                 <ion-label>Coleções</ion-label>
-            </ion-segment-button>
-            <ion-segment-button [routerLink]="['/tabuleiros']" value="tabuleiros">
+            </ion-button>
+            <ion-button class="segment-button" [routerLink]="['/tabuleiros']">
                 <ion-label>Seus tabuleiros</ion-label>
-            </ion-segment-button>
-        </ion-segment>
+            </ion-button>
+        </div>
     </div>
     <div id="collection">
         <h1>Minhas Coleções</h1>

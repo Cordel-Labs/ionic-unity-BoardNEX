@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class LoginPage implements OnInit {
   public forms: FormGroup;
   mode: string = 'login';
+  equal: boolean = true;
 
   constructor(
     private fbApp: FirebaseApp,
@@ -22,7 +23,9 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.forms = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      senha: ['', [Validators.required]],
+      confirmEmail: ['', []],
+      senha: ['', [Validators.required, Validators.minLength(6)]],
+      confirmSenha: ['', []],
     });
   }
 
@@ -43,10 +46,13 @@ export class LoginPage implements OnInit {
 
   changeScreen(){
     this.mode = this.mode == 'login' ? 'register' : 'login';
+    this.equal = true;
     if(this.mode == 'login'){
       this.forms = this.formBuilder.group({
         email: ['', [Validators.required, Validators.email]],
+        confirmEmail: ['', []],
         senha: ['', [Validators.required]],
+        confirmSenha: ['', []],
       });
       document.getElementById('titleText').innerHTML = "Login";
       document.getElementById('toggleText').innerHTML = "Manter-me Conectado";
@@ -55,11 +61,20 @@ export class LoginPage implements OnInit {
       this.forms = this.formBuilder.group({
         email: ['', [Validators.required, Validators.email]],
         confirmEmail: ['', [Validators.required, Validators.email]],
-        senha: ['', [Validators.required]],
+        senha: ['', [Validators.required, Validators.minLength(6)]],
         confirmSenha: ['', [Validators.required]],
       });
       document.getElementById('titleText').innerHTML = "Crie uma conta";
       document.getElementById('toggleText').innerHTML = "Li e concordo com os Termos de Uso e Política de Privacidade";
+    }
+  }
+
+  confirmsChange(){
+    if(this.forms.value.email != this.forms.value.confirmEmail || this.forms.value.senha != this.forms.value.confirmSenha){
+      this.equal = false;
+    }
+    else{
+      this.equal = true;
     }
   }
 }

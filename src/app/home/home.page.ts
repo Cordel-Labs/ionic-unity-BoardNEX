@@ -147,9 +147,7 @@ export class HomePage {
 
   focusSearch(){
     if(this.searchText === '' && !this.searching){
-      console.log(this.colecList);
       this.backupList = this.backupList.concat(this.colecList);
-      console.log(this.backupList);
       this.backupFC = this.favouritedCount;
       this.favouritedCount = 0;
       this.searching = true;
