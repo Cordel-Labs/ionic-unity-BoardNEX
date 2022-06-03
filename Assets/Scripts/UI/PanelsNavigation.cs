@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PanelsNavigation : MonoBehaviour
 {
     private int currentPanel = 0;
+    [SerializeField] GameObject CharacterSelectionPopup;
     [SerializeField] GameObject[] panels;
     [SerializeField] private Image[] buttons;
     [SerializeField] private Color selectedColor;
