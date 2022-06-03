@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Tilemaps;
+using UnityEngine.EventSystems;
 
 public class BoardController : MonoBehaviour
 {
@@ -17,6 +18,12 @@ public class BoardController : MonoBehaviour
     private int cInd = 0;
     // private int st = 0;
     private bool firstTile = true;
+
+    [SerializeField] private GraphicRaycaster m_Raycaster;
+    [SerializeField] private EventSystem m_EventSystem;
+    [SerializeField] private RectTransform canvasRect;
+    private PointerEventData m_PointerEventData;
+    private List<RaycastResult> results;
     
     private readonly Dictionary<string, TileBase> tilesTypes = new Dictionary<string, TileBase>();
 
@@ -30,10 +37,11 @@ public class BoardController : MonoBehaviour
         foreach (var tile in scTiles){
             tilesTypes.Add(tile.name, tile);
         }
-
+        
+#if !UNITY_EDITOR && UNITY_WEBGL
+        WebGLInput.captureAllKeyboardInput = false;
         FirebaseManager.WindowMessage("started");
-        // string boardString = "9;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;path0_0;cenario0;path0_3;path0_4;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;path0_1;path0_2;cenario0;path0_5;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;path0_6;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;path0_8;path0_7;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0";
-        // GenerateBoard(boardString.Split(';'));
+#endif
     }
 
     void Update(){
@@ -63,6 +71,8 @@ public class BoardController : MonoBehaviour
         }
         
         if(Input.GetMouseButtonDown(0) && board.HasTile(pos) && board.GetTile(pos).name == st.name){
+            if(MouseAboveCanva()) return;
+            if(st.name == "path0" && tilePath.Contains(pos)) return;
             if(cInd > 0){
                 changes.RemoveRange(changes.Count - cInd, cInd);
                 cInd = 0;
@@ -322,6 +332,15 @@ public class BoardController : MonoBehaviour
     public void ClosePopup(GameObject popup) {
         popup.SetActive(false);
     }
+
+    public bool MouseAboveCanva(){
+        m_PointerEventData = new PointerEventData(m_EventSystem);
+        m_PointerEventData.position = Input.mousePosition;
+        results = new List<RaycastResult>();
+        m_Raycaster.Raycast(m_PointerEventData, results);
+        if(results.Count > 0) return true;
+        else return false;
+    }
 }
 
 public struct Change
@@ -332,7 +351,7 @@ public struct Change
     public Change(Vector3Int[] pos, string pt, string nt)
     {
         cPos = pos;
-        prevTile = pt;
+        prevTile = (pt == "pclearPath") ? "cenario0" : pt;
         newTile = nt;
     }
 }

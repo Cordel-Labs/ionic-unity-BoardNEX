@@ -8,7 +8,7 @@ public class CharacterSelection : MonoBehaviour
     [SerializeField] private Texture2D[] Characters;
     [SerializeField] private Text inputValue;
     [SerializeField] private Button confirmButton;
-    private Toggle selectedCharacter;
+    private Toggle selectedCharacter, previousSelected;
 
     private void Update()
     {
@@ -48,12 +48,11 @@ public class CharacterSelection : MonoBehaviour
     public void SetSelectedCharacter(Toggle btn)
     {
         print("called");
-        if (selectedCharacter != null) selectedCharacter.image.CrossFadeAlpha(1, 0.2f, true);
-
+        if(selectedCharacter == btn || previousSelected == btn) return;
+        if (selectedCharacter != null){ 
+            selectedCharacter.isOn = true;
+            previousSelected = selectedCharacter;
+        }
         selectedCharacter = btn;
-
-        btn.image.CrossFadeAlpha(0.5f, 0.2f, true);
-
-        btn.isOn = true;
     }
 }

@@ -172,7 +172,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e93391601b9a55444abc09c308f1a4ab, type: 2}
   - {fileID: 11400000, guid: d5ea8d5047cf91347837a911837b8126, type: 2}
   - {fileID: 11400000, guid: 012ac14f366471e42bbd96d02c3d85b9, type: 2}
-  errorText: {fileID: 0}
+  errorText: {fileID: 910758359}
+  m_Raycaster: {fileID: 369037908}
+  m_EventSystem: {fileID: 1508793414}
+  canvasRect: {fileID: 1896696951}
 --- !u!4 &175347966
 Transform:
   m_ObjectHideFlags: 0
@@ -263,6 +266,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 329849891}
   m_CullTransparentMesh: 1
+--- !u!114 &369037908 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6750412283999635989, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+  m_PrefabInstance: {fileID: 613957943}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &393060688
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,6 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b83468c548976ea4ba796089d6a11d5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bc: {fileID: 175347965}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1796,6 +1811,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1008922781359598593, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+      propertyPath: m_Elasticity
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008922781359598593, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+      propertyPath: m_ScrollSensitivity
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3195016365555666373, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1

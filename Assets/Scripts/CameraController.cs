@@ -7,14 +7,15 @@ public class CameraController : MonoBehaviour
 {
     private bool isDragging = false;
     private float mouseStartX, mouseStartY;
+    [SerializeField] private BoardController bc;
         
     void Update()
     {
-        if (Input.mouseScrollDelta.y > 0 && Camera.main.orthographicSize > 1)
+        if (Input.mouseScrollDelta.y > 0 && Camera.main.orthographicSize > 1 && !bc.MouseAboveCanva())
         {
             Camera.main.orthographicSize -= .5f;
         }
-        else if (Input.mouseScrollDelta.y < 0 && Camera.main.orthographicSize < 21)
+        else if (Input.mouseScrollDelta.y < 0 && Camera.main.orthographicSize < 21 && !bc.MouseAboveCanva())
         {
             Camera.main.orthographicSize += .5f;
         }
