@@ -8,7 +8,7 @@
         <form [formGroup]="forms">
             <h1 id="titleText">Login</h1>
 
-            <ion-input formControlName="email" placeholder="Input text"></ion-input>
+            <ion-input formControlName="email" placeholder="E-mail"></ion-input>
             <div *ngIf="forms.get('email').touched && !forms.get('email').valid" class="alert">
                 <p *ngIf="forms.get('email').errors?.['required']">
                     Este campo é obrigatório. 
@@ -18,7 +18,7 @@
                 </p>
             </div>
 
-            <ion-input *ngIf="mode == 'register'" formControlName="confirmEmail" (ionChange)="confirmsChange()" placeholder="Input text"></ion-input>
+            <ion-input formControlName="confirmEmail" placeholder="Confirmar e-mail" *ngIf="mode == 'register'" (ionChange)="confirmsChange()"></ion-input>
             <div *ngIf="mode == 'register' && forms.get('confirmEmail').touched" class="alert">
                 <p *ngIf="forms.get('confirmEmail').errors?.['required']">
                     Este campo é obrigatório. 
@@ -38,7 +38,7 @@
                 </p>
             </div>
 
-            <ion-input *ngIf="mode == 'register'" formControlName="confirmSenha" (ionChange)="confirmsChange()" placeholder="Senha" type="password"></ion-input>
+            <ion-input formControlName="confirmSenha" placeholder="Confirmar a senha" type="password" *ngIf="mode == 'register'" (ionChange)="confirmsChange()"></ion-input>
             <div *ngIf="mode == 'register' && forms.get('confirmSenha').touched" class="alert">
                 <p *ngIf="forms.get('confirmSenha').errors?.['required']">
                     Este campo é obrigatório. 
