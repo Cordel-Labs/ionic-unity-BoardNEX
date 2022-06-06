@@ -6,25 +6,34 @@ using UnityEngine.UI;
 public class CharacterSelection : MonoBehaviour
 {
     [SerializeField] private Texture2D[] Characters;
-    [SerializeField] private Text inputValue;
+    [SerializeField] private InputField input;
     [SerializeField] private Button confirmButton;
     private Toggle selectedCharacter, previousSelected;
+    // private bool writing = false;
 
     private void Update()
     {
-        confirmButton.enabled = inputValue.text != "" && selectedCharacter != null;
+        confirmButton.enabled = input.text != "" && selectedCharacter != null;
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Cancel();
         }
+    }
 
+    public void LooseFocus(){
+        print("Loose focus");
     }
 
     public void ClearValues()
     {
-        inputValue.text = "";
-        selectedCharacter = null;
+        input.text = "";
+        if(selectedCharacter != null){
+            selectedCharacter.interactable = true;
+            selectedCharacter.isOn = true;
+            selectedCharacter = null;
+            previousSelected = null;
+        }
     }
 
     public void Cancel()
@@ -47,12 +56,13 @@ public class CharacterSelection : MonoBehaviour
 
     public void SetSelectedCharacter(Toggle btn)
     {
-        print("called");
-        if(selectedCharacter == btn || previousSelected == btn) return;
+        if(previousSelected == btn || selectedCharacter == btn) return;
         if (selectedCharacter != null){ 
-            selectedCharacter.isOn = true;
             previousSelected = selectedCharacter;
+            previousSelected.interactable = true;
+            previousSelected.isOn = true;
         }
         selectedCharacter = btn;
+        btn.interactable = false;
     }
 }
