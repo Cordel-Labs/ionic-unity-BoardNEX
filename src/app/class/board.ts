@@ -11,6 +11,7 @@ export class Board {
     fbKey;
     boardString;
     constructor(forms, createdDate, boardString){
+      this.fbKey = this.makeid();
       this.titulo = forms.titulo;
       this.disciplina = forms.disciplina;
       this.curso = forms.curso;
@@ -20,17 +21,6 @@ export class Board {
       this.createdDate = createdDate;
       this.lastMod = createdDate;
       this.favourited = false;
-      this.boardString = boardString;
-      this.fbKey = this.makeid();
-    }
-    editColection(forms, editedDate, boardString){
-      this.titulo = forms.titulo;
-      this.disciplina = forms.disciplina;
-      this.curso = forms.curso;
-      this.tema = forms.tema;
-      this.etapa = forms.etapa;
-      this.topico = forms.topico;
-      this.lastMod = editedDate;
       this.boardString = boardString;
     }
     private makeid() {

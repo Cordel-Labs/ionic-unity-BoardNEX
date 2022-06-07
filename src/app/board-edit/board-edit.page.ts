@@ -82,14 +82,25 @@ export class BoardEditPage implements OnInit {
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');
     let mm = String(today.getMonth() + 1).padStart(2, '0');
-    let todayDate = `${dd}/${mm}/${today.getFullYear()} ${String(today.getHours())}:${String(today.getMinutes())}`;
+    let todayDate = `${dd}/${mm}/${today.getFullYear()} ${String(today.getHours()).padStart(2, '0')}:${String(today.getMinutes()).padStart(2, '0')}`;
 
     if(this.newBoard !== null)
-      this.newBoard.editColection(this.forms.value, todayDate, boardString);
+      this.editColection(this.forms.value, todayDate, boardString);
     else
       this.newBoard = new Board(this.forms.value, todayDate, boardString);
 
     this.dismiss();
+  }
+
+  editColection(forms, editedDate, boardString){
+    this.newBoard.titulo = forms.titulo;
+    this.newBoard.disciplina = forms.disciplina;
+    this.newBoard.curso = forms.curso;
+    this.newBoard.tema = forms.tema;
+    this.newBoard.etapa = forms.etapa;
+    this.newBoard.topico = forms.topico;
+    this.newBoard.lastMod = editedDate;
+    this.newBoard.boardString = boardString;
   }
 
   async slidesLoaded(slides) {

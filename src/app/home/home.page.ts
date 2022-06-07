@@ -120,9 +120,23 @@ export class HomePage {
   }
 
   duplicateCol(ind){
-    const clone = new Colection(this.colecList[ind], this.colecList[ind].createdDate, this.colecList[ind].questoes);
-    this.fbApp.database().ref(this.userId + '/collections/' + clone.fbKey).push(clone);
+    // const clone = new Colection(this.colecList[ind], this.colecList[ind].createdDate, this.colecList[ind].questoes);
+    const clone = this.clone(this.colecList[ind]);
+    this.fbApp.database().ref(this.userId + '/collections/' + clone.fbKey).set(clone);
     this.colecList.splice(ind, 0, clone);
+  }
+
+  clone(obj){
+    const vals = JSON.stringify(obj);
+    const copied = JSON.parse(vals);
+
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0');
+    let todayDate = `${dd}/${mm}/${today.getFullYear()} ${String(today.getHours()).padStart(2, '0')}:${String(today.getMinutes()).padStart(2, '0')}`;
+
+    const copy: Colection = new Colection(copied, todayDate, copied.questoes);
+    return copy;
   }
 
   favouriteCol(ind){
@@ -142,7 +156,7 @@ export class HomePage {
       else
         this.favouritedCount++;
     }
-    this.fbApp.database().ref(this.userId + '/collections/' + this.colecList[ind].fbKey + '/favourited').push(this.colecList[ind].favourited);
+    this.fbApp.database().ref(this.userId + '/collections/' + this.colecList[ind].fbKey + '/favourited').set(this.colecList[ind].favourited);
   }
 
   focusSearch(){

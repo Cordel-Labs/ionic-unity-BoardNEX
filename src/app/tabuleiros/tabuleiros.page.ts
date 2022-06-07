@@ -19,7 +19,7 @@ export class TabuleirosPage implements OnInit {
   searchText = '';
   favText = 'Favoritar';
   userId: string;
-  count: number;
+  count = 0;
 
   backupList: Board[] = [];
   backupFC = 0;
@@ -114,9 +114,22 @@ export class TabuleirosPage implements OnInit {
   }
 
   duplicateCol(ind){
-    const clone = new Board(this.boards[ind], this.boards[ind].createdDate, '');
-    this.fbApp.database().ref(this.userId + '/boards/' + clone.fbKey).push(clone);
+    const clone = this.clone(this.boards[ind]);
+    this.fbApp.database().ref(this.userId + '/boards/' + clone.fbKey).set(clone);
     this.boards.splice(ind, 0, clone);
+  }
+
+  clone(obj){
+    const vals = JSON.stringify(obj);
+    const copied = JSON.parse(vals);
+
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0');
+    let todayDate = `${dd}/${mm}/${today.getFullYear()} ${String(today.getHours()).padStart(2, '0')}:${String(today.getMinutes()).padStart(2, '0')}`;
+
+    const copy: Board = new Board(copied, todayDate, copied.boardString);
+    return copy;
   }
 
   favouriteCol(ind){
@@ -136,7 +149,7 @@ export class TabuleirosPage implements OnInit {
       else
         this.favouritedCount++;
     }
-    this.fbApp.database().ref(this.userId + '/boards/' + this.boards[ind].fbKey + '/favourited').push(this.boards[ind].favourited);
+    this.fbApp.database().ref(this.userId + '/boards/' + this.boards[ind].fbKey + '/favourited').set(this.boards[ind].favourited);
   }
 
   focusSearch(){

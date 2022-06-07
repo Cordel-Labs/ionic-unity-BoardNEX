@@ -8,9 +8,10 @@ export class Colection {
   createdDate;
   lastMod;
   favourited;
-  fbKey;
+  readonly fbKey;
   questoes: Question[];
   constructor(forms, createdDate, questoes){
+    this.fbKey = this.makeid();
     this.titulo = forms.titulo;
     this.disciplina = forms.disciplina;
     this.curso = forms.curso;
@@ -21,17 +22,6 @@ export class Colection {
     this.lastMod = createdDate;
     this.questoes = questoes;
     this.favourited = false;
-    this.fbKey = this.makeid();
-  }
-  editColection(forms, editedDate, questoes){
-    this.titulo = forms.titulo;
-    this.disciplina = forms.disciplina;
-    this.curso = forms.curso;
-    this.tema = forms.tema;
-    this.etapa = forms.etapa;
-    this.topico = forms.topico;
-    this.lastMod = editedDate;
-    this.questoes = questoes;
   }
   private makeid() {
     var result = '';
