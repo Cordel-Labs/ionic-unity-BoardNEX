@@ -37,6 +37,8 @@ public class BoardController : MonoBehaviour
         foreach (var tile in scTiles){
             tilesTypes.Add(tile.name, tile);
         }
+
+        // CallbackFunc("11;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;path0_7;path0_8;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;path0_6;cenario0;path0_9;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;path0_0;cenario0;path0_5;cenario0;path0_10;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;path0_1;cenario0;path0_4;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;path0_2;path0_3;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0;cenario0");
         
 #if !UNITY_EDITOR && UNITY_WEBGL
         FirebaseManager.WindowMessage("started");
@@ -48,7 +50,8 @@ public class BoardController : MonoBehaviour
         pos = board.WorldToCell(mousePos) + new Vector3Int(0, 0, 10);
         
         if(pos != currentTile && st){
-            board.SetTile(currentTile, (preview) ? preview : null);
+            if(preview != null)
+                board.SetTile(currentTile, preview);
             preview = board.GetTile(pos);
             if((cTileObj = board.GetTile(pos)) && st.name == "path0" && (firstTile || (preview && preview.name == "pclearPath"))){
                 // tile de caminho
