@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: a682c0628bb4fc34985e72addac12ca1
+guid: 971493958aca636439e39b852c702e2c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7452071632023041750
-    second: cenarioSpriteSheet_0
+      213: -2902247422746666468
+    second: spritesheet (1)_0
   - first:
-      213: -7123455761403384509
-    second: cenarioSpriteSheet_1
+      213: 8598634611415830664
+    second: spritesheet (1)_1
   - first:
-      213: 1789497790156707163
-    second: cenarioSpriteSheet_2
+      213: -9082291248603447866
+    second: spritesheet (1)_2
   - first:
-      213: 5375200865934881633
-    second: cenarioSpriteSheet_3
+      213: -7538735397198048313
+    second: spritesheet (1)_3
   - first:
-      213: -1694024354791228705
-    second: cenarioSpriteSheet_4
+      213: 6868685725679776305
+    second: spritesheet (1)_4
   - first:
-      213: -6508149884694460796
-    second: cenarioSpriteSheet_5
+      213: -822257751243665455
+    second: spritesheet (1)_5
   - first:
-      213: -5333284292251156197
-    second: cenarioSpriteSheet_6
+      213: -7499830104114247071
+    second: spritesheet (1)_6
   - first:
-      213: -7566065705145999717
-    second: cenarioSpriteSheet_7
+      213: -8225385953719469307
+    second: spritesheet (1)_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -56,9 +56,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -112,7 +112,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Android
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -127,7 +127,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cenarioSpriteSheet_0
+      name: spritesheet (1)_0
       rect:
         serializedVersion: 2
         x: 0
@@ -135,20 +135,20 @@ TextureImporter:
         width: 1232
         height: 1100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6d6bf73aaa31b6760800000000000000
-      internalID: 7452071632023041750
+      spriteID: c1a54e4885529b7d0800000000000000
+      internalID: -2902247422746666468
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cenarioSpriteSheet_1
+      name: spritesheet (1)_1
       rect:
         serializedVersion: 2
         x: 1232
@@ -156,20 +156,20 @@ TextureImporter:
         width: 1232
         height: 1100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 34d67580ab6642d90800000000000000
-      internalID: -7123455761403384509
+      spriteID: 880d1de1f9c745770800000000000000
+      internalID: 8598634611415830664
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cenarioSpriteSheet_2
+      name: spritesheet (1)_2
       rect:
         serializedVersion: 2
         x: 2464
@@ -177,20 +177,20 @@ TextureImporter:
         width: 1232
         height: 1100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b5513ac42c295d810800000000000000
-      internalID: 1789497790156707163
+      spriteID: 6cd3a5cba3835f180800000000000000
+      internalID: -9082291248603447866
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cenarioSpriteSheet_3
+      name: spritesheet (1)_3
       rect:
         serializedVersion: 2
         x: 3696
@@ -198,20 +198,20 @@ TextureImporter:
         width: 1232
         height: 1100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 163bb6265bc889a40800000000000000
-      internalID: 5375200865934881633
+      spriteID: 7c3d8522918016790800000000000000
+      internalID: -7538735397198048313
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cenarioSpriteSheet_4
+      name: spritesheet (1)_4
       rect:
         serializedVersion: 2
         x: 4928
@@ -219,20 +219,20 @@ TextureImporter:
         width: 1232
         height: 1100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fdafecb13dd9d78e0800000000000000
-      internalID: -1694024354791228705
+      spriteID: 13270f09649725f50800000000000000
+      internalID: 6868685725679776305
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cenarioSpriteSheet_5
+      name: spritesheet (1)_5
       rect:
         serializedVersion: 2
         x: 6160
@@ -240,20 +240,20 @@ TextureImporter:
         width: 1232
         height: 1100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 48689c959286ea5a0800000000000000
-      internalID: -6508149884694460796
+      spriteID: 1df4f478ee0c694f0800000000000000
+      internalID: -822257751243665455
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cenarioSpriteSheet_6
+      name: spritesheet (1)_6
       rect:
         serializedVersion: 2
         x: 7392
@@ -261,20 +261,20 @@ TextureImporter:
         width: 1232
         height: 1100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b110332713e5cf5b0800000000000000
-      internalID: -5333284292251156197
+      spriteID: 16a4d7091404be790800000000000000
+      internalID: -7499830104114247071
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cenarioSpriteSheet_7
+      name: spritesheet (1)_7
       rect:
         serializedVersion: 2
         x: 8624
@@ -282,14 +282,14 @@ TextureImporter:
         width: 1232
         height: 1100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b9ed181f35feff690800000000000000
-      internalID: -7566065705145999717
+      spriteID: 50b30181e0f89dd80800000000000000
+      internalID: -8225385953719469307
       vertices: []
       indices: 
       edges: []

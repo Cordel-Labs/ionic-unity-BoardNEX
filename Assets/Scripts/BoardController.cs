@@ -177,6 +177,11 @@ public class BoardController : MonoBehaviour
     }
 
     private void EraseTile(int ind){
+        // Check if it isn't a path tile
+        if(ind == -1){
+            board.SetTile(pos, st);
+            return;
+        }
         // Array of tiles being erased
         int qnt = tilePath.Count - ind, j = qnt;
         Vector3Int[] posArray = new Vector3Int[qnt];
