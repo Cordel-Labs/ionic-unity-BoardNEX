@@ -2973,6 +2973,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 437581506895073844, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 200.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 437581506895073844, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 39.979
+      objectReference: {fileID: 0}
+    - target: {fileID: 437581506895073844, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 26.052
+      objectReference: {fileID: 0}
+    - target: {fileID: 657825332184189782, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+      propertyPath: m_Pivot.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 657825332184189782, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 657825332184189782, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 657825332184189782, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.09957886
+      objectReference: {fileID: 0}
     - target: {fileID: 1008922781359598593, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
       propertyPath: m_Elasticity
       value: 0.05
@@ -3197,6 +3225,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 175347965}
+    - target: {fileID: 6907202855497854444, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -8.2364
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907202855497854444, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.0000076293945
+      objectReference: {fileID: 0}
     - target: {fileID: 7364101348634861657, guid: b484b38646505ce4eba49692a2a8ba17, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

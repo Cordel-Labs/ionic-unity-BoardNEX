@@ -79,13 +79,15 @@ public class BoardController : MonoBehaviour
                 changes.RemoveRange(changes.Count - cInd, cInd);
                 cInd = 0;
             }
-            changes.Add(new Change(new Vector3Int[1]{pos}, preview.name, st.name));
             if(st.name == "path0"){
                 tilePath.Add(pos);
                 LockTiles(pos);
             }
             else if(st.name == "cenario0"){
                 EraseTile(tilePath.IndexOf(pos));
+            }
+            else {
+                changes.Add(new Change(new Vector3Int[1]{pos}, new string[1]{preview.name}, st.name));
             }
             preview = st;
         }
@@ -99,9 +101,11 @@ public class BoardController : MonoBehaviour
             // Itarate array of tiles changed with the action
             for(int i = 0; i < undo.cPos.Length; i++){
                 // Add back to the tilePath if it was a path0 tile (undoing Eraser)
-                if(undo.prevTile == "path0")
+                print(i);
+                print(undo.prevTile[i]);
+                if(undo.prevTile[i].Contains("path"))
                     tilePath.Add(undo.cPos[i]);
-                board.SetTile(undo.cPos[i], tilesTypes[undo.prevTile]);
+                board.SetTile(undo.cPos[i], tilesTypes[undo.prevTile[i]]);
             }
             if(undo.newTile == "path0"){
                 // Remove from the tilePath if it undid a path0 tile
@@ -170,7 +174,7 @@ public class BoardController : MonoBehaviour
             var target = board.WorldToCell(board.CellToLocal(center) + rot);
             TileBase targetTile = board.GetTile(target);
             preview = board.GetTile(target);
-            if(targetTile && targetTile.name != "path0" && !(preview && preview.name == "pblockPath")){
+            if(targetTile && !targetTile.name.Contains("path") && !(preview && preview.name == "pblockPath")){
                 board.SetTile(target, pathTiles[state]);
             }
         }
@@ -188,15 +192,18 @@ public class BoardController : MonoBehaviour
         // Array of tiles being erased
         int qnt = tilePath.Count - ind, j = qnt;
         Vector3Int[] posArray = new Vector3Int[qnt];
+        string[] pathArray = new string[qnt];
         for(int i = tilePath.Count - 1; i > ind; i--){
             posArray[--j] = tilePath[i];
+            pathArray[j] = board.GetTile(tilePath[i]).name;
             board.SetTile(tilePath[i], st);
             // board.SetEditorPreviewTile(tilePath[i], null);
             tilePath.RemoveAt(i);
         }
         posArray[--j] = tilePath[ind];
+        pathArray[j] = preview.name;
         // Save eraser changes to changes array
-        changes.Add(new Change(posArray, "path0", "cenario0"));
+        changes.Add(new Change(posArray, pathArray, "cenario0"));
         tilePath.RemoveAt(ind);
         if(ind == 0){
             // If erasing from the first tile, make sure it has 'firstTile = true' again
@@ -353,12 +360,16 @@ public class BoardController : MonoBehaviour
 public struct Change
 {
     public Vector3Int[] cPos;
-    public string prevTile, newTile;
+    public string[] prevTile;
+    public string newTile;
 
-    public Change(Vector3Int[] pos, string pt, string nt)
+    public Change(Vector3Int[] pos, string[] pt, string nt)
     {
         cPos = pos;
-        prevTile = (pt == "pclearPath") ? "cenario0" : pt;
+        for(int i = 0; i < pt.Length; i++){
+            if(pt[i] == "pclearPath") pt[i] = "cenario0";
+        }
+        prevTile = pt;
         newTile = nt;
     }
 }
