@@ -44,7 +44,7 @@ public class CharacterSelection : MonoBehaviour
 
     public void Confirm()
     {
-        // TODO: chande the character sprite
+        // TODO: change the character sprite
         ClearValues();
         gameObject.SetActive(false);
     }
@@ -56,13 +56,17 @@ public class CharacterSelection : MonoBehaviour
 
     public void SetSelectedCharacter(Toggle btn)
     {
-        if(previousSelected == btn || selectedCharacter == btn) return;
-        if (selectedCharacter != null){ 
+        if(selectedCharacter == btn) return;
+        
+        if (selectedCharacter != null)
+        {
             previousSelected = selectedCharacter;
             previousSelected.interactable = true;
             previousSelected.isOn = true;
+            previousSelected.GetComponent<Transform>().GetChild(2).gameObject.SetActive(false);
         }
         selectedCharacter = btn;
+        selectedCharacter.GetComponent<Transform>().GetChild(2).gameObject.SetActive(true);
         btn.interactable = false;
     }
 }
