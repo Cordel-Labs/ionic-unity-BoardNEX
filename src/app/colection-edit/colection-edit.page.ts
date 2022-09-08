@@ -66,6 +66,7 @@ export class ColectionEditPage implements OnInit {
       this.altToggles[this.rightAnswer].checked = true;
 
       document.getElementById('edit1').children.item(0).innerHTML = 'Editar Coleção';
+      document.getElementById('edit2').children.item(0).innerHTML = this.newColection.titulo;
     }
     else {
       this.forms = this.formBuilder.group({
@@ -79,7 +80,7 @@ export class ColectionEditPage implements OnInit {
       this.questionForm = this.formBuilder.group({
         enum: ['', [Validators.required]], alter1: [''], alter2: [''], alter3: [''], alter4: ['']
       });
-      this.questions.push(new Question('', ['','','',''], 0), new Question('', ['','','',''], 0), new Question('', ['','','',''], 0), new Question('', ['','','',''], 0));
+      this.questions.push(new Question('', ['','','',''], 0));
     }
   }
 
@@ -176,11 +177,6 @@ export class ColectionEditPage implements OnInit {
       this.qImg = e.target.result;
     };
     reader.readAsDataURL(selectedImage);
-
-    // let storageTask = this.storage.upload(
-    //   this.qImg,
-    //   selectedImage
-    // );
   }
 
   changeRightAnswer(e, ind){
@@ -207,5 +203,9 @@ export class ColectionEditPage implements OnInit {
     this.rightAnswer = this.questions[ind].rightAnswer;
     this.altToggles[this.rightAnswer].checked = true;
     this.qInd = ind;
+  }
+
+  addQuestion(e){
+    this.questions.push(new Question('', ['','','',''], 0));
   }
 }

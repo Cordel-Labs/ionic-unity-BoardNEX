@@ -22,9 +22,12 @@ h1 {
     flex-direction: column;
     padding: 0 5%;
     p {
-        width: 90%;
+        width: 100%;
         text-align: left;
         font: 700 24px/28px Roboto;
+    }
+    >p {
+        padding-left: 4rem;
     }
     form >div {
         width: 100%;
@@ -35,7 +38,7 @@ h1 {
         align-items: flex-start;
         ion-item {
             width: 30%;
-            margin: 0 5% 3% 5%;
+            margin: 0 4rem 3% 4rem;
             position: relative;
             --background: transparent;
             --padding-start: 0px;
@@ -192,6 +195,7 @@ h1 {
             padding: 1% 0;
             ion-col {
                 max-width: 15.6%;
+                max-height: 100%;
                 margin-right: 30px;
                 p {
                     text-align: left;
@@ -203,13 +207,26 @@ h1 {
                     background-color: #8F8F8F;
                     height: 70%;
                     width: 100%;
+                    cursor: pointer;
                     border-radius: 10px;
+                    border: 2px solid transparent;
+                    transition: border .2s linear;
                 }
                 &:last-child {
                     margin-left: 0;
                 }
                 &.selected div {
                     border: 2px solid black;
+                }
+                &.addQuestion div {
+                    background-color: #605858;
+                    border: 2px solid #444141;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    img {
+                        height: 75%;
+                    }
                 }
             }
         }

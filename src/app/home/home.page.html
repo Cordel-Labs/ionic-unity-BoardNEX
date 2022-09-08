@@ -84,33 +84,34 @@
         </div>
     </div>
 </ion-content>
+
 <ion-popover #popover reference="event" class="colecPopover" (willPresent)="popoverText(clickedCol)" (didDismiss)="popoverOpen(undefined)">
     <ng-template>
         <ion-content>
             <ul>
-                <li>
-                    <div (click)="editCollection(clickedCol); popover.dismiss();">
+                <li (click)="editCollection(clickedCol); popover.dismiss();">
+                    <div>
                         <ion-icon name="pencil"></ion-icon><span>Editar</span>
                     </div>
                 </li>
-                <li>
-                    <div (click)="duplicateCol(clickedCol); popover.dismiss();">
+                <li (click)="duplicateCol(clickedCol); popover.dismiss();">
+                    <div>
                         <ion-icon name="copy"></ion-icon><span>Duplicar</span>
                     </div>
                 </li>
-                <li>
-                    <div (click)="popover.dismiss(); favouriteCol(clickedCol);">
+                <li (click)="popover.dismiss(); favouriteCol(clickedCol);">
+                    <div>
                         <ion-icon name="star"></ion-icon><span>{{favText}}</span>
                     </div>
                 </li>
-                <li>
-                    <div (click)="activeDetails(clickedCol); popover.dismiss();">
+                <li (click)="activeDetails(clickedCol); popover.dismiss();">
+                    <div>
                         <ion-icon name="information"></ion-icon><span>Ver detalhes</span>
                     </div>
                 </li>
                 <div class="line"></div>
-                <li>
-                    <div (click)="deleteCol(clickedCol); popover.dismiss();">
+                <li (click)="deleteCol(clickedCol); popover.dismiss();">
+                    <div>
                         <ion-icon name="trash"></ion-icon><span>Excluir</span>
                     </div>
                 </li>

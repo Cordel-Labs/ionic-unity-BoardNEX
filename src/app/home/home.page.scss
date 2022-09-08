@@ -198,18 +198,18 @@
     --width: 200px;
     ul {
         padding: 0;
+        margin: 5px 0;
         li {
             list-style-type: none;
             list-style-type: none;
-            padding-left: 15px;
-            margin-bottom: 14px;
-            &:last-child {
-                margin: 14px 0 0 0;
+            padding: 7px 0 7px 15px;
+            cursor: pointer;
+            &:hover {
+                background-color: #606060;
             }
             div {
                 display: flex;
                 align-items: center;
-                cursor: pointer;
                 span {
                     font: 700 18px/20px Roboto;
                 }

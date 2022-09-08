@@ -1,7 +1,3 @@
-<!-- <ion-header>
-    <ion-title>login</ion-title>
-</ion-header> -->
-
 <ion-content>
     <img src="../../assets/Logo2.png">
     <div>
@@ -11,7 +7,7 @@
             <ion-input formControlName="email" placeholder="E-mail"></ion-input>
             <div *ngIf="forms.get('email').touched && !forms.get('email').valid" class="alert">
                 <p *ngIf="forms.get('email').errors?.['required']">
-                    Este campo é obrigatório. 
+                    Este campo é obrigatório.
                 </p>
                 <p *ngIf="forms.get('email').errors?.['email']">
                     Endereço de e-mail inválido.
@@ -21,7 +17,7 @@
             <ion-input formControlName="confirmEmail" placeholder="Confirmar e-mail" *ngIf="mode == 'register'" (ionChange)="confirmsChange()"></ion-input>
             <div *ngIf="mode == 'register' && forms.get('confirmEmail').touched" class="alert">
                 <p *ngIf="forms.get('confirmEmail').errors?.['required']">
-                    Este campo é obrigatório. 
+                    Este campo é obrigatório.
                 </p>
                 <p *ngIf="forms.value.confirmEmail != forms.value.email">
                     Os e-mails precisam ser iguais.
@@ -31,7 +27,7 @@
             <ion-input formControlName="senha" placeholder="Senha" type="password"></ion-input>
             <div *ngIf="forms.get('senha').touched && !forms.get('senha').valid" class="alert">
                 <p *ngIf="forms.get('senha').errors?.['required']">
-                    Este campo é obrigatório. 
+                    Este campo é obrigatório.
                 </p>
                 <p *ngIf="forms.get('senha').errors?.['minlength']">
                     Precisa ter no mínimo 6 caracteres.
@@ -41,7 +37,7 @@
             <ion-input formControlName="confirmSenha" placeholder="Confirmar a senha" type="password" *ngIf="mode == 'register'" (ionChange)="confirmsChange()"></ion-input>
             <div *ngIf="mode == 'register' && forms.get('confirmSenha').touched" class="alert">
                 <p *ngIf="forms.get('confirmSenha').errors?.['required']">
-                    Este campo é obrigatório. 
+                    Este campo é obrigatório.
                 </p>
                 <p *ngIf="forms.value.confirmSenha != forms.value.senha">
                     As senhas precisam ser iguais.

@@ -1,9 +1,3 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>Nexus</ion-title>
-  </ion-toolbar>
-</ion-header> -->
-
 <ion-content>
     <ion-slides #slides pager="true" [options]="SliderOptions" (ionSlidesDidLoad)="slidesLoaded(slides)">
         <ion-slide id="edit1">
@@ -12,10 +6,6 @@
             <form [formGroup]="forms">
                 <div>
                     <ion-item lines="none">
-                        <!-- <div>
-                            <ion-icon name="help-outline"></ion-icon>
-                            <span>Descrição</span>
-                        </div> -->
                         <ion-label class="ion-text-wrap">
                             <ion-text>
                                 <p>Título</p>
@@ -69,7 +59,7 @@
             </form>
         </ion-slide>
         <ion-slide id="edit2">
-            <h1>Coleção pica</h1>
+            <h1>Nova coleção</h1>
             <form [formGroup]="questionForm" class="flexDiv">
                 <div>
                     <ion-input formControlName="enum" placeholder="Adicione um enunciado"></ion-input>
@@ -107,9 +97,15 @@
                     <ion-icon [name]="footMenuButton" title="abrir"></ion-icon>
                 </div>
                 <ion-row>
-                    <ion-col *ngFor="let a of questions; let i = index" (click)="switchQuestion(i)" class="{{(i === qInd) ? 'selected' : 'none'}}">
+                    <ion-col *ngFor="let a of questions; let i = index" class="{{(i === qInd) ? 'selected' : 'none'}}">
                         <p>Questão {{i+1}}</p>
-                        <div></div>
+                        <div (click)="switchQuestion(i)"></div>
+                    </ion-col>
+                    <ion-col class="addQuestion" *ngIf="questions.length < 5">
+                        <p>Nova questão</p>
+                        <div (click)="addQuestion($event)">
+                            <img src="../../assets/icon/addIcon.png">
+                        </div>
                     </ion-col>
                 </ion-row>
             </div>
